@@ -1,0 +1,55 @@
+server:
+  port: 8083
+
+eureka:
+  client:
+    enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+spring:
+  config:
+    activate:
+      on-profile: default
+
+  application:
+    name: adoption
+    zipkin: http://zipkin:9411
+
+  h2:
+    console:
+      enabled: false
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/adoption_db
+    username: postgres
+    password: admin123
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
