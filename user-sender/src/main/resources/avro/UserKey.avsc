@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.usersender.infrastructure.kafka.avro",
+  "name": "UserKey",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ]
+}

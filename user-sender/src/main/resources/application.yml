@@ -1,19 +1,18 @@
 server:
-  port: 8080
+  port: 6666
 
 spring:
   application:
     name: user-sender
   kafka:
     properties:
-      schema.registry.url: http://schema-registry:8084
-      bootstrap.servers: kafka:29092
+      schema.registry.url: http://localhost:8081
+      bootstrap-servers: localhost:9092
+      group-id: ${spring.application.name}
     producer:
-      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-
-environment:
-  user-topic: user
+      properties:
+        key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+        value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
 
 logging:
   level:

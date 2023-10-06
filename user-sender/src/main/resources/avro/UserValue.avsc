@@ -1,0 +1,24 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.usersender.infrastructure.kafka.avro",
+  "name": "UserValue",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "int"
+    },
+    {
+      "name": "branch",
+      "type": "string",
+      "default": "SCOUTER"
+    }
+  ]
+}
