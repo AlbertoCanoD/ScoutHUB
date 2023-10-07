@@ -6,15 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.kafka.core.KafkaTemplate;
 
+@Configuration
 @SpringBootApplication
-@ComponentScan(basePackages = "org.scouthub.usersender")
+@ComponentScan(basePackages = "org.scouthub.usersender.infrastructure.kafka")
 public class UserSenderApplication {
 
-//  @Autowired private KafkaTemplate<UserKey, UserValue> kafkaTemplate;
+  @Autowired private KafkaTemplate<UserKey, UserValue> kafkaTemplate;
 
   public static void main(String[] args) {
     SpringApplication.run(UserSenderApplication.class, args);

@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-  @Value("${environment.user-topic}")
-  private String USERS_TOPIC;
+  private final String USERS_TOPIC = "user";
 
   @Autowired UserKafkaMapper userMapper;
 

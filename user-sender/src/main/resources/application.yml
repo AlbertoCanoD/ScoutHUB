@@ -4,21 +4,17 @@ server:
 spring:
   application:
     name: user-sender
+  # Kafka Settings
   kafka:
-    properties:
-      schema.registry.url: http://localhost:8081
-      bootstrap-servers: localhost:9092
-      group-id: ${spring.application.name}
+    bootstrap-servers: ${kafka:localhost}:9092
     producer:
       properties:
         key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
         value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-
-environment:
-  user-topic: user
+        schema.registry.url: http://${schema-registry:localhost}:8081
 
 logging:
   level:
     ROOT: DEBUG
-    io.confluent.kafka: DEBUG
-    org.apache.kafka: DEBUG
+    io.confluent.kafka: ERROR
+    org.apache.kafka: ERROR
