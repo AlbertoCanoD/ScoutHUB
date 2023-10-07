@@ -14,6 +14,9 @@ spring:
         key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
         value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
 
+environment:
+  user-topic: user
+
 logging:
   level:
     ROOT: DEBUG
