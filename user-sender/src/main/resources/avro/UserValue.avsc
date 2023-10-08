@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "org.scouthub.usersender.infrastructure.kafka.avro",
+  "namespace": "org.scouthub.usersender.infraestructure.kafka.avro",
   "name": "UserValue",
   "fields": [
     {

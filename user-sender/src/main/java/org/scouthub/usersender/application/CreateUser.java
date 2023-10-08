@@ -14,7 +14,7 @@ public final class CreateUser {
       return;
     }
 
-    log.debug("Sending user {} to kafka topic", user.getName());
+    log.debug("Sending user {} to kafka topic", user.getId());
     userService.createUser(user);
   }
 }

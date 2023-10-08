@@ -7,5 +7,5 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDeleteRequestDTO {
-  private Long id;
+  Long id;
 }

@@ -1,14 +1,17 @@
 package org.scouthub.usersender.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-  private Long id;
-  private String name;
-  private Branch branch;
+    Long id;
+    String name;
+    int age;
+    String branch;
 }

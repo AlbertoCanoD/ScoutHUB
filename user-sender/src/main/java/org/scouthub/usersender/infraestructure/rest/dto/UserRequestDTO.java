@@ -1,15 +1,18 @@
 package org.scouthub.usersender.infraestructure.rest.dto;
 
-import lombok.*;
-import org.scouthub.usersender.domain.model.Branch;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import javax.validation.constraints.DecimalMin;
 
 @Getter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class UserRequestDTO {
-  private Long id;
-  private String name;
-  private int age;
-  private Branch branch;
+    Long id;
+
+    String name;
+
+    int age;
+
+    String branch;
 }

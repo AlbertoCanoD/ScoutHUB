@@ -3,20 +3,19 @@ package org.scouthub.usersender.infraestructure.kafka.service;
 import lombok.extern.slf4j.Slf4j;
 import org.scouthub.usersender.domain.model.User;
 import org.scouthub.usersender.domain.service.UserService;
+import org.scouthub.usersender.infraestructure.kafka.avro.UserValue;
 import org.scouthub.usersender.infraestructure.kafka.mapper.UserKafkaMapper;
-import org.scouthub.usersender.infrastructure.kafka.avro.UserKey;
-import org.scouthub.usersender.infrastructure.kafka.avro.UserValue;
+import org.scouthub.usersender.infraestructure.kafka.avro.UserKey;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-  private final String USERS_TOPIC = "user";
+  final String USERS_TOPIC = "user";
 
-  @Autowired UserKafkaMapper userMapper;
+  @Autowired UserKafkaMapper userKafkaMapper;
 
   @Autowired private KafkaTemplate<UserKey, UserValue> kafkaTemplate;
 
@@ -29,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     UserKey userKey = new UserKey();
     userKey.setId(user.getId());
-    UserValue userValue = userMapper.userToUserValue(user);
+    UserValue userValue = userKafkaMapper.userToUserValue(user);
 
     log.debug("Sending user to kafka topic");
     kafkaTemplate.send(USERS_TOPIC, userKey, userValue);
