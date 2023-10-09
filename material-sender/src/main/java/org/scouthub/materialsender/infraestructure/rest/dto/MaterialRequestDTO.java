@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class MaterialRequestDTO {
-    Long id;
-    String name;
-    int cuantity;
-    float price;
+  Long id;
+  String name;
+  int quantity;
+  float price;
 }

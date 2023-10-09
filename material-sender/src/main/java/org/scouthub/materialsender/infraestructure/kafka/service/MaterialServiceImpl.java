@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+@SuppressWarnings("unused")
 @Service
 @Slf4j
 public class MaterialServiceImpl implements MaterialService {
-  final String MATERIALS_TOPIC = "material";
+  static final String MATERIALS_TOPIC = "material";
 
   @Autowired MaterialKafkaMapper materialKafkaMapper;
 

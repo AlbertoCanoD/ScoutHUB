@@ -6,5 +6,5 @@ import org.scouthub.materialsender.infraestructure.kafka.avro.MaterialValue;
 
 @Mapper(componentModel = "spring")
 public interface MaterialKafkaMapper {
-    MaterialValue materialToMaterialValue(Material material);
+  MaterialValue materialToMaterialValue(Material material);
 }

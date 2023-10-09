@@ -20,9 +20,9 @@ services:
       KAFKA_HEAP_OPTS: -Xmx3G -Xms1G
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true" # False to True
       KAFKA_DELETE_TOPIC_ENABLE: "true"
-      KAFKA_CREATE_TOPICS: "user:3:1"
+      #KAFKA_CREATE_TOPICS: "user:3:1, material:3:1"
       KAFKA_LISTENERS: PLAINTEXT://kafka:29092,EXTERNAL://_{HOSTNAME_COMMAND}:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,EXTERNAL://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
@@ -71,3 +71,10 @@ services:
     restart: always
     ports:
       - "8085:8080"
+
+  material-sender:
+    build: ./material-sender
+    container_name: material-sender
+    restart: always
+    ports:
+      - "8087:8080"

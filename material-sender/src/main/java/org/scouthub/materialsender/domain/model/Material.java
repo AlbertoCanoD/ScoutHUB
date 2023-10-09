@@ -12,6 +12,6 @@ import lombok.Setter;
 public class Material {
   Long id;
   String name;
-  int cuantity;
+  int quantity;
   float price;
 }
