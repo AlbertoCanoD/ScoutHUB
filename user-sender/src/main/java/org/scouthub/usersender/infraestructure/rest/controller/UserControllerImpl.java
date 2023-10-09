@@ -6,7 +6,6 @@ import org.scouthub.usersender.application.CreateUser;
 import org.scouthub.usersender.application.DeleteUser;
 import org.scouthub.usersender.domain.model.User;
 import org.scouthub.usersender.infraestructure.kafka.service.UserServiceImpl;
-import org.scouthub.usersender.infraestructure.rest.dto.UserDeleteRequestDTO;
 import org.scouthub.usersender.infraestructure.rest.dto.UserRequestDTO;
 import org.scouthub.usersender.infraestructure.rest.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +16,25 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UserControllerImpl implements UserController {
 
-    @Autowired
-    UserMapper userMapper;
+  @Autowired UserMapper userMapper;
 
-    @Autowired
-    UserServiceImpl userService;
+  @Autowired UserServiceImpl userService;
 
-    @Override
-    @PostMapping(value = "/user")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void createUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-        log.debug("Received request to create user");
-        User user = userMapper.userRequestDTOToUser(userRequestDTO);
-        CreateUser.create(user, userService);
-    }
+  @Override
+  @PostMapping(value = "/user")
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  public void createUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+    log.debug("Received request to create user");
+    User user = userMapper.userRequestDTOToUser(userRequestDTO);
+    CreateUser.create(user, userService);
+  }
 
-    @Override
-    @DeleteMapping(value = "/user/{userId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteUser(@PathVariable UserDeleteRequestDTO user) {
-        log.debug("Received request to delete user");
-        DeleteUser.delete(user.getId(), userService);
-    }
+  @DeleteMapping(value = "/user/{userId}")
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  // TODO - Mirar si lanzando el id directamente funciona mejor que con el DTO
+  // deleteUser(@PathVariable UserDeleteRequestDTO user)
+  public void deleteUser(@PathVariable Long userId) {
+    log.debug("Received request to delete user");
+    DeleteUser.delete(userId, userService);
+  }
 }

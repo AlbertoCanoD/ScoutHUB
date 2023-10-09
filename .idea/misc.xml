@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
         <option value="$PROJECT_DIR$/user-sender/pom.xml" />
         <option value="$PROJECT_DIR$/activity-sender/pom.xml" />
+        <option value="$PROJECT_DIR$/user-validator/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

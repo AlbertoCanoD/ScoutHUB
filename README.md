@@ -1,7 +1,7 @@
 # Scout Hub
 
 Scout Hub es un sistema de gestión de grupos scouts. Esta gestión es realizada
-de forma asíncrona, con colas de mensajería, Apache Kafka y Spring Cloud.
+de forma asíncrona, con colas de mensajería en concreto con Apache Kafka.
 
 Gracias a este sistema, podremos gestionar los usuarios de forma que no
 hagamos registros inválidos. Además de poder generar presupuestos de
@@ -10,33 +10,46 @@ que cuadren los recursos y presupuestos.
 
 ## Diagrama de funcionamiento
 
-![Diagrama de Funcionamiento](diagrama-funcionamiento.png)
+# Revisar Fotos
+
+### Parte de usuarios
+
+![User-Diagram](user-diagram.png)
+
+### Parte de excursiones
+
+![Excursion-Diagram](excursion-diagram.png)
+(Ver imagen en el repositorio)
 
 ## Explicación del funcionamiento de los microservicios y topics
 
-- **USER CRUD**: Se gestiona la creación, modificación, eliminación y obtención de usuarios y se envían los mensajes al
+### Productores
+
+- **USER SENDER**: Se gestiona la creación, modificación, eliminación y obtención de usuarios y se envían los mensajes
+  al
   topic "user".
+
+- **ACTIVITY SENDER**: Se gestiona la creación, modificación, eliminación y obtención de actividades y se envían los
+  mensajes al topic "activity".
+
+- **MATERIAL SENDER**: Se gestiona la creación, modificación, eliminación y obtención de materiales y se envían los
+  mensajes al topic "material".
+
+### Servicios
 
 - **USER VALIDATOR**: Siguiendo la topología PCS, recibe los mensajes del topic "user", valida que los usuarios estén
   correctos y los envía al topic "validator".
-
-- **API USER**: Recibe los mensajes del topic "validator", con los usuarios que son válidos y los almacena en la base de
-  datos.
-
-- **ACTIVITY CRUD**: Se gestiona la creación, modificación, eliminación y obtención de actividades y se envían los
-  mensajes
-  al topic "activity".
-
-- **MATERIAL CRUD**: Se gestiona la creación, modificación, eliminación y obtención de materiales y se envían los
-  mensajes
-  al topic "material".
 
 - **BUDGET GENERATOR**: Utiliza el patron MIXBI, recibe los mensajes de los topics "activity" y "material", genera un
   presupuesto y lo envía al topic "budget".
 
 - **EXCURSION GENERATOR**: Utiliza la topología AGR, recibe los mensajes del topic "budget", genera una excursión y la
-  envía
-  al topic "excursion".
+  envía al topic "excursion".
+
+### API de consulta
+
+- **API USER**: Recibe los mensajes del topic "validator", con los usuarios que son válidos y los almacena en la base de
+  datos.
 
 - **API EXCURSION**: Recibe los mensajes del topic "excursion", con las excursiones que son válidas y las almacena en la
   base de datos.
@@ -46,26 +59,17 @@ que cuadren los recursos y presupuestos.
 ### User-Crud
 
 - Registrar un usuario.
-- Modificar un usuario.
 - Eliminar un usuario.
-- Obtener un usuario por id.
-- Obtener todos los usuarios.
 
 ### Activity-Crud
 
-- Registrar una mascota.
-- Modificar una mascota.
-- Eliminar una mascota.
-- Obtener una mascota por id.
-- Obtener todas las mascotas.
+- Registrar una actividad.
+- Eliminar una actividad.
 
 ### Material-Crud
 
-- Registrar una mascota.
-- Modificar una mascota.
-- Eliminar una mascota.
-- Obtener una mascota por id.
-- Obtener todas las mascotas.
+- Registrar un material.
+- Eliminar un material.
 
 ## Requisitos no funcionales
 
@@ -82,6 +86,8 @@ ENSEÑAR TABLAS DE LA BASE DE DATOS Y EL SENTIDO QUE TIENEN
 
 ## Diagrama de clases
 
+GENERAR DIAGRAMA DE CLASES EN CASO DE QUE SEA POSIBLE
+
 ## Guía de uso
 
 1. ``mvn clean install`` para instalar las dependencias del proyecto.
@@ -93,30 +99,20 @@ ENSEÑAR TABLAS DE LA BASE DE DATOS Y EL SENTIDO QUE TIENEN
 
 ## Problemas conocidos
 
-- o.s.c.l.core.RoundRobinLoadBalancer: No servers available for service:
-  Ocurre al reiniciar un microservicio, no es detectado por el Gateway Server. Posible
-  solucion [SimpleDiscoveryClient](https://docs.spring.io/spring-cloud-commons/docs/current/reference/html/#simplediscoveryclient).
-
 ## Documentación
 
-- Config server: http://localhost:8888/<nombre_servicio>/default
-- Eureka server: http://localhost:8761/
-- Gateway: http://localhost:9001/
 # HACER EL SWAGGER
-- User-Crud: http://localhost:8080/swagger-ui.html
-- Pet-Crud: http://localhost:8081/swagger-ui.html
-- Health: http://localhost:8082/swagger-ui.html
-- Adoption: http://localhost:8083/swagger-ui.html
-- Zipkin: http://localhost:9411/zipkin/
-- Prometheus: http://localhost:9090/
-- Grafana: http://localhost:3000/
-- Kibana: http://localhost:5601/
-- Sonar: http://localhost:9000/
-- Jenkins: http://localhost:8084/
+
+- User-Sender: http://localhost:8085/swagger-ui.html
+- Activity-Sender: http://localhost:8086/swagger-ui.html
+- Material-Sender: http://localhost:8087/swagger-ui.html
+
+- Kowl: http://localhost:18080/topics
 
 ## Valor añadido
 
 - Swagger con los endpoints de los microservicios documentados.
+- Microservicios Dockerizados y despliegue directo desde el docker-compose.
 
 ## Autor
 
