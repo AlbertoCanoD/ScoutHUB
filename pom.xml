@@ -18,7 +18,7 @@
     <modules>
         <!-- Producers -->
         <module>user-sender</module>
-        <!--<module>activity-sender</module>-->
+        <module>activity-sender</module>
         <module>material-sender</module>
         <!--
 

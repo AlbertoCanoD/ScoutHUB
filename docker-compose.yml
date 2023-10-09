@@ -72,6 +72,13 @@ services:
     ports:
       - "8085:8080"
 
+  activity-sender:
+    build: ./activity-sender
+    container_name: activity-sender
+    restart: always
+    ports:
+      - "8086:8080"
+
   material-sender:
     build: ./material-sender
     container_name: material-sender
