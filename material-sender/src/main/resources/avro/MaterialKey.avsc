@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.materialsender.infraestructure.kafka.avro",
+  "name": "MaterialKey",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ]
+}

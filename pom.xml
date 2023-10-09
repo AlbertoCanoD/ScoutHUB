@@ -16,11 +16,11 @@
     <packaging>pom</packaging>
 
     <modules>
+        <!-- Producers -->
         <module>user-sender</module>
-        <!-- Producers
-
         <module>activity-sender</module>
         <module>material-sender</module>
+        <!--
 
         Services
         <module>user-validator</module>
@@ -29,8 +29,7 @@
 
         Consumers
         <module>api-user</module>
-        <module>api-excursion</module>
-        <module>user-sender</module>-->
+        <module>api-excursion</module>-->
 
     </modules>
 
