@@ -1,7 +1,22 @@
 # Scout Hub
 
+![ScoutHUB LOGO](scout-hub.png)
+
 Scout Hub es un sistema de gestión de grupos scouts. Esta gestión es realizada
-de forma asíncrona, con colas de mensajería en concreto con Apache Kafka.
+de forma asíncrona, con colas de mensajería en concreto con Apache Kafka 
+y con Spring Boot
+
+Los Scouts se dividen en ramas segun sus edades, para que un usuario sea 
+válido deberá cumplir el requisito de tener una edad y rama que concuerden 
+según la siguiente tabla:
+
+| Rama    | Rango de Edades |
+|---------|-----------------|
+| BEAVER  | 6 - 8           |
+| CUB     | 9 - 11          |
+| RANGER  | 12 - 14         |
+| PIONEER | 15 - 19         |
+| SCOUTER | 20 - 100        |
 
 Gracias a este sistema, podremos gestionar los usuarios de forma que no
 hagamos registros inválidos. Además de poder generar presupuestos de
@@ -98,6 +113,11 @@ GENERAR DIAGRAMA DE CLASES EN CASO DE QUE SEA POSIBLE
 6. Arrancar desde el IDE los servicios User-Crud, Pizza-Read y Pizza-Write.
 
 ## Problemas conocidos
+
+## Información tecnica
+
+Se pueden crear los topics con las particiones que queramos, para ello en la config de los micoros hay que desactivar
+autocreate topics y en el docker compose hay que descomentar la linea #KAFKA_CREATE_TOPICS: "user:3:1, material:3:1"
 
 ## Documentación
 
