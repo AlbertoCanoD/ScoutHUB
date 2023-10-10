@@ -1,8 +1,8 @@
-package org.scouthub.usersender.application;
+package org.scouthub.uservalidator.application;
 
 import lombok.extern.slf4j.Slf4j;
-import org.scouthub.usersender.domain.model.User;
-import org.scouthub.usersender.domain.service.UserService;
+import org.scouthub.uservalidator.domain.model.User;
+import org.scouthub.uservalidator.domain.service.UserService;
 
 @Slf4j
 public final class CreateUser {
@@ -15,6 +15,6 @@ public final class CreateUser {
     }
 
     log.debug("Sending user {} to kafka topic", user.getId());
-    userService.createUser(user); 
+    userService.createUser(user);
   }
 }

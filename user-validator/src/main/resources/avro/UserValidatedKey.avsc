@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.uservalidator.infraestructure.kafka.avro",
+  "name": "UserValidatedKey",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ]
+}

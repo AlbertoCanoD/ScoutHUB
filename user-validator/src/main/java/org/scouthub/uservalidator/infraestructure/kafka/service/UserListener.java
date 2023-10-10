@@ -1,59 +1,76 @@
 package org.scouthub.uservalidator.infraestructure.kafka.service;
 
+import java.util.LinkedList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
-import org.scouthub.uservalidator.domain.UserRepository;
+import org.scouthub.uservalidator.application.CreateUser;
+import org.scouthub.uservalidator.application.DeleteUser;
+import org.scouthub.uservalidator.application.VerifyUser;
+import org.scouthub.uservalidator.domain.model.User;
 import org.scouthub.uservalidator.infraestructure.kafka.BinderProcessor;
+import org.scouthub.uservalidator.infraestructure.kafka.avro.UserKey;
+import org.scouthub.uservalidator.infraestructure.kafka.avro.UserValidatedKey;
+import org.scouthub.uservalidator.infraestructure.kafka.avro.UserValidatedValue;
+import org.scouthub.uservalidator.infraestructure.kafka.avro.UserValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class UserListener {
-    // TODO - En caso de que los usuarios esten mal, almacenarlos con el error que tengan, crear nuevo modelo de usuario con error
+  @Autowired UserServiceImpl userService;
 
-    @Autowired
-    UserRepository userRepository;
+  @Autowired VerifyUser verifyUser;
 
-    @Autowired
-    UserServiceImpl userService;
+  @StreamListener()
+  @SendTo(BinderProcessor.USER_VALIDATED)
+  public KStream<UserValidatedKey, UserValidatedValue> users(
+      @Input(BinderProcessor.USER) KStream<UserKey, UserValue> users) {
+    log.debug("User received by kafka topic");
+    return users.flatMap(
+        (userKey, userValue) -> {
+          log.debug("UserKey {}, UserValue {}", userKey, userValue);
+          List<KeyValue<UserValidatedKey, UserValidatedValue>> result = new LinkedList<>();
+          if ((userValue == null)) {
+            log.debug("User is a tombstone");
+            DeleteUser.delete(userKey.getId(), userService);
+            result.add(KeyValue.pair(new UserValidatedKey(userKey.getId()), null));
+          } else {
+            log.debug("User is not a tombstone");
 
-    @StreamListener()
-    @SendTo(BinderProcessor.USER_VALIDATED)
-    public KStream<UserValidatedKey, UserValidatedValue> prendas(
-            @Input(BinderProcessor.USER) KStream<UserKey, UserValue> prendas) {
+            User user =
+                new User(
+                    userValue.getId(),
+                    userValue.getName(),
+                    userValue.getAge(),
+                    userValue.getBranch());
 
-        log.debug("Prenda recibida por topid de kafka");
-        return prendas.flatMap((prendaKey, prendaValue) -> {
-            log.debug("PrendaKey {}, PrendaValue {}", prendaKey, prendaValue);
-            List<KeyValue<PrendaPromocionadaKey, PrendaPromocionadaValue>> result = new LinkedList<>();
-            if ((prendaValue == null)) { // Thombstone record
-                EliminarPrenda.eliminar(prendaKey.getReferencia(), prendaRepository, prendaService);
-                result.add(KeyValue.pair(new PrendaPromocionadaKey(prendaKey.getReferencia()), null));
-            } else {
-                log.debug("Prenda is not a tombstone");
-                Prenda prenda = new Prenda(prendaValue.getReferencia(), prendaValue.getPrecio(),
-                        prendaValue.getPrecio(), prendaValue.getCategorias());
-                CrearPrenda.crear(prenda, prendaRepository, prendaService);
-                PrendaPromocionadaValue prendaPromocionadaValue = new PrendaPromocionadaValue(
-                        prenda.getReferencia(),
-                        prenda.getPrecio(),
-                        prenda.getPrecio_promocionado(),
-                        prenda.getCategorias()
-                );
-                result.add(
-                        KeyValue.pair(new PrendaPromocionadaKey(prendaKey.getReferencia()), prendaPromocionadaValue));
+            // Verify age and branch
+            if (!verifyUser.isValidUser(user)) {
+              DeleteUser.delete(userKey.getId(), userService);
+              result.add(KeyValue.pair(new UserValidatedKey(userKey.getId()), null));
+              return result;
             }
-            return result;
+
+            CreateUser.create(user, userService);
+
+            UserValidatedValue userValidatedValue =
+                new UserValidatedValue(
+                    userValue.getId(),
+                    userValue.getName(),
+                    userValue.getAge(),
+                    userValue.getBranch());
+
+            result.add(KeyValue.pair(new UserValidatedKey(userKey.getId()), userValidatedValue));
+          }
+          return result;
         });
-    }
+  }
 }

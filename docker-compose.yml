@@ -2,6 +2,7 @@ version: '3'
 services:
   zookeeper:
     image: library/zookeeper:3.7.0
+    container_name: zookeeper
     ports:
       - "2181:2181"
     environment:
@@ -85,3 +86,10 @@ services:
     restart: always
     ports:
       - "8087:8080"
+
+  user-validator:
+    build: ./user-validator
+    container_name: user-validator
+    restart: always
+    ports:
+      - "8088:8080"

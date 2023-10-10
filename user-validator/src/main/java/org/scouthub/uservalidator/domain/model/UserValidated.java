@@ -9,10 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserWithError {
-  Long id;
-  String name;
-  int age;
-  String branch;
-  String error;
+public class UserValidated {
+    Long id;
+    String name;
+    int age;
+    String branch;
 }

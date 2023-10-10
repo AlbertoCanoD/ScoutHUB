@@ -4,13 +4,41 @@ server:
 spring:
   application:
     name: user-validator
+
   kafka:
+    # Propiedades generales de Kafka
     properties:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
+
+    # Consumimos de "user"
+    consumer:
+      key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      group-id: user_validator
+      auto-offset-reset: earliest
+
+    # Producimos a "user_validated"
     producer:
       key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          auto-create-topics: true
+        streams:
+          binder:
+            configuration:
+              state.dir: /tmp
+              commit.interval.ms: 100
+              topology.optimization: all
+              session.timeout.ms: 10000
+              schema.registry.url: http://schema-registry:8084
+              auto.register.schemas: true
+              default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 
 logging:
   level:

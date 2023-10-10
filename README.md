@@ -3,8 +3,7 @@
 ![ScoutHUB LOGO](scout-hub.png)
 
 Scout Hub es un sistema de gestión de grupos scouts. Esta gestión es realizada
-de forma asíncrona, con colas de mensajería en concreto con Apache Kafka 
-y con Spring Boot
+de forma asíncrona, con topics en concreto de Apache Kafka y con Spring Boot.
 
 Los Scouts se dividen en ramas segun sus edades, para que un usuario sea 
 válido deberá cumplir el requisito de tener una edad y rama que concuerden 

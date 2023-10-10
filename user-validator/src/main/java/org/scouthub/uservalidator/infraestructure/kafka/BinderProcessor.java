@@ -10,8 +10,8 @@ public interface BinderProcessor {
   String USER_VALIDATED = "user_validated";
 
   @Input(USER)
-  KStream<?, ?> users();
+  KStream<?, ?> user();
 
   @Output(USER_VALIDATED)
-  KStream<?, ?> users_validated();
+  KStream<?, ?> user_validated();
 }
