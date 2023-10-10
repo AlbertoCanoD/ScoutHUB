@@ -1,13 +1,12 @@
 package org.scouthub.uservalidator.application;
 
 import org.scouthub.uservalidator.domain.model.Branch;
-import org.scouthub.uservalidator.domain.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.scouthub.uservalidator.infraestructure.kafka.avro.UserValidatedValue;
 import org.springframework.stereotype.Component;
 
 @Component
 public class VerifyUser {
-  public boolean isValidUser(User user) {
+  public static boolean isValidUser(UserValidatedValue user) {
     String branch = user.getBranch();
     int age = user.getAge();
     Branch userBranch = Branch.valueOf(branch.toUpperCase());

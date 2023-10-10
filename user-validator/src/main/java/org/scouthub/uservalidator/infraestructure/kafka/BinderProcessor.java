@@ -1,8 +1,9 @@
 package org.scouthub.uservalidator.infraestructure.kafka;
 
-import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.SubscribableChannel;
 
 public interface BinderProcessor {
   String USER = "user";
@@ -10,8 +11,8 @@ public interface BinderProcessor {
   String USER_VALIDATED = "user_validated";
 
   @Input(USER)
-  KStream<?, ?> user();
+  SubscribableChannel user();
 
   @Output(USER_VALIDATED)
-  KStream<?, ?> user_validated();
+  MessageChannel user_validated();
 }
