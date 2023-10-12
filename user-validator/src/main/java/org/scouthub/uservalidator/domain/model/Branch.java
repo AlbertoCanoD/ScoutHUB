@@ -5,5 +5,5 @@ public enum Branch {
   CUB,
   RANGER,
   PIONEER,
-  SCOUTER;
+  SCOUTER
 }
