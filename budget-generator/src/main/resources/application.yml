@@ -11,7 +11,7 @@ spring:
     name: budget-generator
 
   datasource:
-    url: jdbc:mysql://budget-generator-db:3306/budget-generator-db
+    url: jdbc:mysql://budget-generator-db:3307/budget-generator-db
     username: root
     password: root
 

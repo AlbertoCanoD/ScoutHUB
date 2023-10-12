@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "org.scouthub.budgetgenerator.infraestructure.kafka.avro",
+  "namespace": "org.scouthub.activitysender.infraestructure.kafka.avro",
   "name": "ActivityKey",
   "fields": [
     {

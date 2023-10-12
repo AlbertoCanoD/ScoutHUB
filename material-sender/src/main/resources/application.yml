@@ -4,10 +4,14 @@ server:
 spring:
   application:
     name: material-sender
+
   kafka:
+    # Propiedades generales de Kafka
     properties:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
+
+    # Producimos a "material"
     producer:
       key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer

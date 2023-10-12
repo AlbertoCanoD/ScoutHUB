@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "org.scouthub.budgetgenerator.infraestructure.kafka.avro",
+  "namespace": "org.scouthub.materialsender.infraestructure.kafka.avro",
   "name": "MaterialKey",
   "fields": [
     {

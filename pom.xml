@@ -26,11 +26,11 @@
         <!-- Services -->
         <module>user-validator</module>
         <module>budget-generator</module>
-        <!--<module>excursion-generator</module>
+        <!--<module>excursion-generator</module> -->
 
-        Consumers
+        <!-- Consumers -->
         <module>api-user</module>
-        <module>api-excursion</module>-->
+        <!--<module>api-excursion</module>-->
     </modules>
 
     <parent>

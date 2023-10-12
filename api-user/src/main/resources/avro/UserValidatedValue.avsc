@@ -1,7 +1,7 @@
 {
   "type": "record",
-  "namespace": "org.scouthub.materialsender.infraestructure.kafka.avro",
-  "name": "MaterialValue",
+  "namespace": "org.scouthub.uservalidator.infraestructure.kafka.avro",
+  "name": "UserValidatedValue",
   "fields": [
     {
       "name": "id",
@@ -12,12 +12,12 @@
       "type": "string"
     },
     {
-      "name": "quantity",
+      "name": "age",
       "type": "int"
     },
     {
-      "name": "price",
-      "type": "float"
+      "name": "branch",
+      "type": "string"
     }
   ]
 }
