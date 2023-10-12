@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-  static  final String USERS_TOPIC = "user";
+  static final String USERS_TOPIC = "user";
 
   @Autowired UserKafkaMapper userKafkaMapper;
 

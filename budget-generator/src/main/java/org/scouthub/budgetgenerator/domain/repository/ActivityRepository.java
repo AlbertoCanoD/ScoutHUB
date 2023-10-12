@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
-    void deleteByMaterialId(Long id);
+  void deleteByMaterialId(Long id);
 }

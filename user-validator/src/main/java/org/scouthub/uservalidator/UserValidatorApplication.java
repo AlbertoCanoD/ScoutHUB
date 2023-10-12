@@ -2,7 +2,6 @@ package org.scouthub.uservalidator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.scouthub.uservalidator.application.VerifyUser;
 import org.scouthub.uservalidator.infraestructure.kafka.avro.UserKey;
 import org.scouthub.uservalidator.infraestructure.kafka.avro.UserValidatedKey;
 import org.scouthub.uservalidator.infraestructure.kafka.avro.UserValidatedValue;
@@ -10,24 +9,19 @@ import org.scouthub.uservalidator.infraestructure.kafka.avro.UserValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.handler.annotation.SendTo;
 
 // @Configuration
 @SpringBootApplication
 // @EnableBinding(BinderProcessor.class)
 @Slf4j
 public class UserValidatorApplication {
+  @Autowired private KafkaTemplate<UserValidatedKey, UserValidatedValue> kafkaTemplate;
+
   public static void main(String[] args) {
     SpringApplication.run(UserValidatorApplication.class, args);
   }
-
-  @Autowired private KafkaTemplate<UserValidatedKey, UserValidatedValue> kafkaTemplate;
 
   @KafkaListener(topics = "user")
   public void consumeMessage(ConsumerRecord<UserKey, UserValue> user) {

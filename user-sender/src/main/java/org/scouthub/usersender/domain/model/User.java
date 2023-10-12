@@ -10,8 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    Long id;
-    String name;
-    int age;
-    String branch;
+  Long id;
+  String name;
+  int age;
+  String branch;
 }

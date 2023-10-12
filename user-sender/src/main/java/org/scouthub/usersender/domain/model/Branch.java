@@ -7,4 +7,3 @@ public enum Branch {
   PIONEER,
   SCOUTER;
 }
-

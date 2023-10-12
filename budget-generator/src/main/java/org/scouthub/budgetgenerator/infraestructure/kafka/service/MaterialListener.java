@@ -23,34 +23,34 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Slf4j
 public class MaterialListener {
-    @Autowired
-    MaterialRepository materialRepository;
+  @Autowired MaterialRepository materialRepository;
 
-    @Autowired
-    ActivityRepository activityRepository;
+  @Autowired ActivityRepository activityRepository;
 
-    @Autowired
-    BudgetRepository budgetRepository;
+  @Autowired BudgetRepository budgetRepository;
 
-    @Autowired
-    ActivityService activityService;
+  @Autowired ActivityService activityService;
 
-    @StreamListener
-    @Profile({"default"})
-    public void materials(@Input(BinderProcessor.MATERIAL)KStream<MaterialKey, MaterialValue> materials) {
+  @StreamListener
+  @Profile({"default"})
+  public void materials(
+      @Input(BinderProcessor.MATERIAL) KStream<MaterialKey, MaterialValue> materials) {
 
-        log.debug("Material received by kafka topic");
-        materials.foreach((materialKey, materialValue) -> {
-
-            log.debug("materialKey {}, materialValue {}", materialKey, materialValue);
-            if ((materialValue == null)) { // Thombstone record
-                DeleteMaterial.delete(materialKey.getId(), materialRepository, activityRepository);
-                return;
-            }
-            Material material = new Material(materialValue.getId(), materialValue.getName(), materialValue.getQuantity(), materialValue.getPrice());
-            CreateMaterial.create(material, materialRepository);
+    log.debug("Material received by kafka topic");
+    materials.foreach(
+        (materialKey, materialValue) -> {
+          log.debug("materialKey {}, materialValue {}", materialKey, materialValue);
+          if ((materialValue == null)) { // Thombstone record
+            DeleteMaterial.delete(materialKey.getId(), materialRepository, activityRepository);
+            return;
+          }
+          Material material =
+              new Material(
+                  materialValue.getId(),
+                  materialValue.getName(),
+                  materialValue.getQuantity(),
+                  materialValue.getPrice());
+          CreateMaterial.create(material, materialRepository);
         });
-    }
-
-
+  }
 }
