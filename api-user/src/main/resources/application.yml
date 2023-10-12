@@ -24,13 +24,39 @@ spring:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
 
+  cloud:
+    stream:
+      bindings:
+        user_validated:
+          content-type: application/avro
+          destination: user_validated
+          consumer:
+            useNativeDecoding: true
+      kafka:
+        streams:
+          binder:
+            stateStoreRetry:
+              maxAttempts: 10
+            configuration:
+              state.dir: /tmp
+              commit.interval.ms: 100
+              topology.optimization: all
+              session.timeout.ms: 10000
+              schema.registry.url: http://schema-registry:8084
+              auto.register.schemas: true
+              default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        consumer:
+          key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+          value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+
     # Consumimos de "user_validated"
-    consumer:
-      group-id: ${spring.application.name}
-      auto-offset-reset: earliest
-      properties:
-        key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-        value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+#    consumer:
+#      group-id: ${spring.application.name}
+#      auto-offset-reset: earliest
+#      properties:
+#        key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+#        value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
 
 logging:
   level:

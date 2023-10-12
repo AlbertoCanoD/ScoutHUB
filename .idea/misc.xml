@@ -17,6 +17,7 @@
         <option value="$PROJECT_DIR$/activity-sender/pom.xml" />
         <option value="$PROJECT_DIR$/user-validator/pom.xml" />
         <option value="$PROJECT_DIR$/budget-generator/pom.xml" />
+        <option value="$PROJECT_DIR$/api-user/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
