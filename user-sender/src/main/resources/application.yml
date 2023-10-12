@@ -4,13 +4,17 @@ server:
 spring:
   application:
     name: user-sender
+
   kafka:
+    # Propiedades generales de Kafka
     properties:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
+
+    # Producimos a "user"
     producer:
-      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      key-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+      value-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
 
 logging:
   level:

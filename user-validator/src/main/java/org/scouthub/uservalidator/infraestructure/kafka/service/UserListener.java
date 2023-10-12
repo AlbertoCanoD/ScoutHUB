@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class UserListener {
+
+
+
+
   //  @Autowired UserServiceImpl userService;
   //
   //  @Autowired VerifyUser verifyUser;

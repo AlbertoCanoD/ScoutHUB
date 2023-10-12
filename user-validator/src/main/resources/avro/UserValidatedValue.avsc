@@ -17,8 +17,7 @@
     },
     {
       "name": "branch",
-      "type": "string",
-      "default": "SCOUTER"
+      "type": "string"
     }
   ]
 }
