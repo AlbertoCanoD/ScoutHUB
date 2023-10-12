@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.budgetgenerator.infraestructure.kafka.avro",
+  "name": "BudgetKey",
+  "fields": [
+    {
+      "name": "activityId",
+      "type": "long"
+    }
+  ]
+}

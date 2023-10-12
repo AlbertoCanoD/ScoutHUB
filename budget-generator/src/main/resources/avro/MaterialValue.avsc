@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.budgetgenerator.infraestructure.kafka.avro",
+  "name": "MaterialValue",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "quantity",
+      "type": "int"
+    },
+    {
+      "name": "price",
+      "type": "float"
+    }
+  ]
+}

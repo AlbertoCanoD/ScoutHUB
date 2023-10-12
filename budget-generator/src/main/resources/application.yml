@@ -2,8 +2,22 @@ server:
   port: 8080
 
 spring:
+
+  config:
+    activate:
+      on-profile: default
+
   application:
-    name: user-validator
+    name: budget-generator
+
+  datasource:
+    url: jdbc:mysql://budget-generator-db:3306/budget-generator-db
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
 
   kafka:
     # Propiedades generales de Kafka
@@ -11,25 +25,22 @@ spring:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
 
-    # Consumimos de "user"
-    consumer:
-      group-id: ${spring.application.name}
-      auto-offset-reset: earliest
-      properties:
-        key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-        value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-
-    # Producimos a "user_validated"
-    producer:
-      properties:
-        key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializeri
-        value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    # Consumimos de "activity" y "material"
+#    consumer:
+#      group-id: ${spring.application.name}
+#      auto-offset-reset: earliest
+#      properties:
+#        key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+#        value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+#
+#    # Producimos a "budget"
+#    producer:
+#      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+#      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
 
   cloud:
     stream:
       kafka:
-        binder:
-          auto-create-topics: false
         streams:
           binder:
             configuration:
@@ -41,8 +52,6 @@ spring:
               auto.register.schemas: true
               default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
               default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-
-
 
 logging:
   level:

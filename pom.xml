@@ -25,8 +25,8 @@
 
         <!-- Services -->
         <module>user-validator</module>
-        <!--<module>budget-generator</module>
-        <module>excursion-generator</module>
+        <module>budget-generator</module>
+        <!--<module>excursion-generator</module>
 
         Consumers
         <module>api-user</module>

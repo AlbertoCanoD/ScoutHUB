@@ -50,20 +50,23 @@ public class UserValidatorApplication {
 
     //    boolean isValid = VerifyUser.isValidUser(userValidatedValue);
 
-    UserValidatedKey key = new UserValidatedKey(1L);
-    UserValidatedValue value = new UserValidatedValue(1L, "234234abrero", 10, "pino");
-    kafkaTemplate.send("user_validated", key, value);
+    //    UserValidatedKey key = new UserValidatedKey(1L);
+    //    UserValidatedValue value = new UserValidatedValue(1L, "234234abrero", 10, "pino");
+    //    kafkaTemplate.send("user_validated", key, value);
+
+    kafkaTemplate.send("user_validated", userValidatedKey, userValidatedValue);
 
     // Referencair a produceMessage
     //    if (isValid) kafkaTemplate.send("user_validated", userValidatedKey, userValidatedValue);
     //    else kafkaTemplate.send("user_validated", userValidatedKey, null);
   }
+}
 
   //  @EventListener(ContextRefreshedEvent.class)
-  public void produceMessage(UserValidatedKey key, UserValidatedValue value) {
-    kafkaTemplate.send("user_validated", key, value);
-  }
-}
+//  public void produceMessage(UserValidatedKey key, UserValidatedValue value) {
+//    kafkaTemplate.send("user_validated", key, value);
+//  }
+// }
 
   //    @KafkaListener(topics = "user")
   //    public void process(ConsumerRecord<UserKey, UserValue> user) {
