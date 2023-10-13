@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+@SuppressWarnings("ALL")
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
@@ -26,8 +27,7 @@ public class UserServiceImpl implements UserService {
       return;
     }
 
-    UserKey userKey = new UserKey();
-    userKey.setId(user.getId());
+    UserKey userKey = new UserKey(user.getId());
     UserValue userValue = userKafkaMapper.userToUserValue(user);
 
     log.debug("Sending user to kafka topic");

@@ -151,10 +151,10 @@ GENERAR DIAGRAMA DE CLASES EN CASO DE QUE SEA POSIBLE
 - User-Sender: http://localhost:8085/swagger-ui.html
 - Activity-Sender: http://localhost:8086/swagger-ui.html
 - Material-Sender: http://localhost:8087/swagger-ui.html
-- Budget-Generator: http://localhost:8089/swagger-ui.html
-- Excursion-Generator: http://localhost:8091/swagger-ui.html
+- Budget-Generator: http://localhost:8089/swagger-ui.html (No va)
+- Excursion-Generator: http://localhost:8091/swagger-ui.html (No va)
 - Api-User: http://localhost:8090/swagger-ui.html
-- Api-Excursion: http://localhost:8092/swagger-ui.html
+- Api-Excursion: http://localhost:8092/swagger-ui.html (No va)
 
 ### Kafka
 

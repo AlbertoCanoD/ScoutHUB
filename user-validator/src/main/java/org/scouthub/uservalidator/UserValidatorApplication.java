@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.handler.annotation.Payload;
 
 @SuppressWarnings("ALL")
 @SpringBootApplication
@@ -25,7 +26,8 @@ public class UserValidatorApplication {
   }
 
   @KafkaListener(topics = "user")
-  public void consumeandProduceMessage(ConsumerRecord<UserKey, UserValue> user)
+  public void consumeAndProduceMessage(
+      @Payload(required = false) ConsumerRecord<UserKey, UserValue> user)
       throws BranchDoesNotExist {
     log.info(
         "Received message from topic {} in partition {} and offset {} with key {}",
@@ -33,9 +35,15 @@ public class UserValidatorApplication {
         user.partition(),
         user.offset(),
         user.key());
-    log.info("");
 
     log.info("UserKey: {} and UserValue: {}", user.key(), user.value());
+
+    // Send Tombstone record if the user is null
+    if (user.value() == null) {
+      log.info("Delete User {}", user.key().getId());
+      kafkaTemplate.send("user_validated", new UserValidatedKey(user.key().getId()), null);
+      return;
+    }
 
     UserValidatedKey userValidatedKey = new UserValidatedKey(user.key().getId());
     UserValidatedValue userValidatedValue =

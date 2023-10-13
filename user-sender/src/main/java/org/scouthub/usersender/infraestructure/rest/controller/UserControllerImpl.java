@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+@SuppressWarnings("ALL")
 @RestController
 @Slf4j
 public class UserControllerImpl implements UserController {
@@ -22,17 +23,16 @@ public class UserControllerImpl implements UserController {
 
   @Override
   @PostMapping(value = "/user")
-  @ResponseStatus(HttpStatus.ACCEPTED)
+  @ResponseStatus(HttpStatus.CREATED)
   public void createUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
     log.debug("Received request to create user");
     User user = userMapper.userRequestDTOToUser(userRequestDTO);
     CreateUser.create(user, userService);
   }
 
+  @Override
   @DeleteMapping(value = "/user/{userId}")
-  @ResponseStatus(HttpStatus.ACCEPTED)
-  // TODO - Mirar si lanzando el id directamente funciona mejor que con el DTO
-  // deleteUser(@PathVariable UserDeleteRequestDTO user)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteUser(@PathVariable Long userId) {
     log.debug("Received request to delete user");
     DeleteUser.delete(userId, userService);

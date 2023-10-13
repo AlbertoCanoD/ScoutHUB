@@ -51,18 +51,18 @@ public class ActivityListener {
                 new Activity(
                     activityValue.getId(), activityValue.getName(), activityValue.getDescription());
             CreateActivity.create(activity, activityRepository, budgetService);
-            float materialPrice =
-                materialRepository.getReferenceById(activity.getMaterialId()).getPrice();
-            float totalCost = materialPrice * activity.getMaterialQuantity();
-            BudgetValue budgetValue =
-                new BudgetValue(
-                    activityValue.getId(),
-                    activityValue.getName(),
-                    activityValue.getMaterialId(),
-                    activityValue.getMaterialQuantity(),
-                    materialPrice,
-                    totalCost);
-            result.add(KeyValue.pair(new BudgetKey(activityKey.getId()), budgetValue));
+//            float materialPrice =
+//                materialRepository.getReferenceById(activity.getMaterialId()).getPrice();
+//            float totalCost = materialPrice * activity.getMaterialQuantity();
+//            BudgetValue budgetValue =
+//                new BudgetValue(
+//                    activityValue.getId(),
+//                    activityValue.getName(),
+//                    activityValue.getMaterialId(),
+//                    activityValue.getMaterialQuantity(),
+//                    materialPrice,
+//                    totalCost);
+//            result.add(KeyValue.pair(new BudgetKey(activityKey.getId()), budgetValue));
           }
           return result;
         });

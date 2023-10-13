@@ -7,10 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserRequestDTO {
   Long id;
-
   String name;
-
   int age;
-
   String branch;
 }
