@@ -8,6 +8,8 @@ import org.scouthub.apiexcursion.application.DeleteExcursion;
 import org.scouthub.apiexcursion.domain.model.Excursion;
 import org.scouthub.apiexcursion.domain.repository.ExcursionRepository;
 import org.scouthub.apiexcursion.infraestructure.kafka.BinderProcessor;
+import org.scouthub.excursiongenerator.infraestructure.kafka.avro.ExcursionKey;
+import org.scouthub.excursiongenerator.infraestructure.kafka.avro.ExcursionValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -32,12 +34,7 @@ public class ExcursionListener {
           }
 
           // Create excursion in database
-          Excursion excursion =
-              new Excursion(
-                  excursionValue.getId(),
-                  excursionValue.getName(),
-                  excursionValue.getAge(),
-                  excursionValue.getBranch());
+          Excursion excursion = new Excursion(excursionValue.getId());
           CreateExcursion.create(excursion, excursionRepository);
         });
   }

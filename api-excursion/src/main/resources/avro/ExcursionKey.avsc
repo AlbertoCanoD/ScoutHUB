@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.excursiongenerator.infraestructure.kafka.avro",
+  "name": "ExcursionKey",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ]
+}
