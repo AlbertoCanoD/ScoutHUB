@@ -1,0 +1,58 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-excursion
+
+  config:
+    activate:
+      on-profile: default
+
+  datasource:
+    url: jdbc:mysql://api-excursion-db:3306/api-excursion-db
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  kafka:
+    # Propiedades generales de Kafka
+    properties:
+      schema.registry.url: http://schema-registry:8084
+      bootstrap.servers: kafka:29092
+
+  # Consumidor de alto nivel de "excursion"
+  cloud:
+    stream:
+      bindings:
+        excursion:
+          content-type: application/avro
+          destination: excursion
+          consumer:
+            useNativeDecoding: true
+      kafka:
+        streams:
+          binder:
+            stateStoreRetry:
+              maxAttempts: 10
+            configuration:
+              state.dir: /tmp
+              commit.interval.ms: 100
+              topology.optimization: all
+              session.timeout.ms: 10000
+              schema.registry.url: http://schema-registry:8084
+              auto.register.schemas: true
+              default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        consumer:
+          key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+          value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+
+logging:
+  level:
+    ROOT: DEBUG
+    io.confluent.kafka: DEBUG
+    org.apache.kafka: DEBUG
