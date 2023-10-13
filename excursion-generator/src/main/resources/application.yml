@@ -1,13 +1,18 @@
 server:
   port: 8080
 
+topic-in-0: profesores-asignados
+topic-out-0: profesores-nivel-asignatura
+
 spring:
   application:
     name: excursion-generator
+
   kafka:
     properties:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
+
     producer:
       key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer

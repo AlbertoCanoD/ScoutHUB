@@ -12,19 +12,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Budget {
-  Budget(BudgetPrimaryKey id) {}
-
   @EmbeddedId BudgetPrimaryKey id;
-
   @OneToOne()
   @JoinColumn(name = "budget_activity")
   @MapsId("activity")
   Activity activity;
-
   @OneToOne()
   @JoinColumn(name = "budget_material")
   @MapsId("material")
   Material material;
+
+  Budget(BudgetPrimaryKey id) {}
 
   //  Long activityId;
   //  String activityName;

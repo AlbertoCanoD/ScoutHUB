@@ -7,7 +7,8 @@ import org.scouthub.apiexcursion.infraestructure.rest.dto.GetExcursionResponseDT
 
 @Mapper(componentModel = "spring")
 public interface ExcursionMapper {
-  GetExcursionResponseDTO  excursionToGetExcursionResponseDTO(Excursion excursion);
+  GetExcursionResponseDTO excursionToGetExcursionResponseDTO(Excursion excursion);
 
-  List<GetExcursionResponseDTO> excursionListToGetExcursionResponseDTOList(List<Excursion> excursions);
+  List<GetExcursionResponseDTO> excursionListToGetExcursionResponseDTOList(
+      List<Excursion> excursions);
 }

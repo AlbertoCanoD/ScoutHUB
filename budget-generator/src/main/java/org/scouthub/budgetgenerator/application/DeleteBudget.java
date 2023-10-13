@@ -13,6 +13,10 @@ public final class DeleteBudget {
     // TODO - Implementar
   }
 
-  public static void delete(BudgetPrimaryKey budgetPrimaryKey, BudgetRepository budgetRepository, ActivityRepository activityRepository, MaterialRepository materialRepository, BudgetServiceImpl budgetService) {
-  }
+  public static void delete(
+      BudgetPrimaryKey budgetPrimaryKey,
+      BudgetRepository budgetRepository,
+      ActivityRepository activityRepository,
+      MaterialRepository materialRepository,
+      BudgetServiceImpl budgetService) {}
 }

@@ -1,7 +1,6 @@
 package org.scouthub.apiuser.application;
 
 import java.util.List;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.scouthub.apiuser.domain.model.User;

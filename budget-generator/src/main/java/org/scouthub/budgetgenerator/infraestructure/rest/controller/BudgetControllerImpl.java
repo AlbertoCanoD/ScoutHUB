@@ -26,9 +26,9 @@ public class BudgetControllerImpl implements BudgetController {
   @PostMapping("/budget/activity/{activityId}/material/{materialId}/{materialQuantity}")
   @ResponseStatus(HttpStatus.CREATED)
   public void createBudget(
-      @RequestParam Long activityId,
-      @PathVariable Long materialId,
-      @PathVariable int materialQuantity) {
+          @RequestParam Long activityId,
+          @PathVariable Long materialId,
+          @PathVariable int materialQuantity) {
 
     BudgetPrimaryKey budgetPrimaryKey = new BudgetPrimaryKey(activityId, materialId);
     CreateBudget.create(

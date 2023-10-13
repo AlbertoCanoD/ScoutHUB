@@ -29,8 +29,7 @@ public class MaterialListener {
 
   @Autowired BudgetRepository budgetRepository;
 
-  @Autowired
-  BudgetService budgetService;
+  @Autowired BudgetService budgetService;
 
   @StreamListener
   @Profile({"default"})

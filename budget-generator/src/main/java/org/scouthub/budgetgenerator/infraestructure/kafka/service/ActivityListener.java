@@ -29,8 +29,7 @@ import org.springframework.stereotype.Component;
 public class ActivityListener {
   @Autowired ActivityRepository activityRepository;
 
-  @Autowired
-  BudgetService budgetService;
+  @Autowired BudgetService budgetService;
 
   @Autowired MaterialRepository materialRepository;
 
@@ -50,9 +49,7 @@ public class ActivityListener {
             log.debug("Activity is not a tombstone");
             Activity activity =
                 new Activity(
-                    activityValue.getId(),
-                    activityValue.getName(),
-                    activityValue.getDescription());
+                    activityValue.getId(), activityValue.getName(), activityValue.getDescription());
             CreateActivity.create(activity, activityRepository, budgetService);
             float materialPrice =
                 materialRepository.getReferenceById(activity.getMaterialId()).getPrice();

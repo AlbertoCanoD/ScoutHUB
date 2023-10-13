@@ -19,6 +19,7 @@
         <option value="$PROJECT_DIR$/budget-generator/pom.xml" />
         <option value="$PROJECT_DIR$/api-user/pom.xml" />
         <option value="$PROJECT_DIR$/api-excursion/pom.xml" />
+        <option value="$PROJECT_DIR$/excursion-generator/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
