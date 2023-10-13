@@ -3,14 +3,14 @@ package org.scouthub.budgetgenerator.application;
 import lombok.extern.slf4j.Slf4j;
 import org.scouthub.budgetgenerator.domain.model.Activity;
 import org.scouthub.budgetgenerator.domain.repository.ActivityRepository;
-import org.scouthub.budgetgenerator.domain.service.ActivityService;
+import org.scouthub.budgetgenerator.domain.service.BudgetService;
 
 @Slf4j
-public class CreateActivity {
+public final class CreateActivity {
   private CreateActivity() {}
 
   public static void create(
-      Activity activity, ActivityRepository activityRepository, ActivityService activityService) {
+      Activity activity, ActivityRepository activityRepository, BudgetService budgetService) {
     if (activity == null) {
       log.error("Activity can't be null");
       return;
@@ -18,6 +18,6 @@ public class CreateActivity {
 
     log.debug("Creating activity {} with id {}", activity.getName(), activity.getId());
     activityRepository.save(activity);
-    activityService.createActivity(activity);
+    budgetService.create(activity);
   }
 }

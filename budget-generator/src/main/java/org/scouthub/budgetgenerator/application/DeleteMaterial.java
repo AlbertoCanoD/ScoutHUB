@@ -1,15 +1,14 @@
 package org.scouthub.budgetgenerator.application;
 
-import org.scouthub.budgetgenerator.domain.repository.ActivityRepository;
+import org.scouthub.budgetgenerator.domain.model.Material;
 import org.scouthub.budgetgenerator.domain.repository.MaterialRepository;
 
-public class DeleteMaterial {
+public final class DeleteMaterial {
   private DeleteMaterial() {}
 
-  public static void delete(
-      Long id, MaterialRepository materialRepository, ActivityRepository activityRepository) {
-    if (materialRepository.existsById(id)) {
-      materialRepository.deleteById(id);
+  public static void delete(Long materialId, MaterialRepository materialRepository) {
+    if (materialRepository.existsById(materialId)) {
+      materialRepository.deleteById(materialId);
     }
   }
 }

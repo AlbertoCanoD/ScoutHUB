@@ -1,16 +1,16 @@
 package org.scouthub.budgetgenerator.application;
 
 import org.scouthub.budgetgenerator.domain.repository.ActivityRepository;
-import org.scouthub.budgetgenerator.domain.service.ActivityService;
+import org.scouthub.budgetgenerator.domain.service.BudgetService;
 
-public class DeleteActivity {
+public final class DeleteActivity {
   private DeleteActivity() {}
 
   public static void delete(
-      Long id, ActivityRepository activityRepository, ActivityService activityService) {
-    if (activityRepository.existsById(id)) {
-      activityRepository.deleteById(id);
-      activityService.deleteActivity(id);
+      Long activityId, ActivityRepository activityRepository, BudgetService budgetService) {
+    if (activityRepository.existsById(activityId)) {
+      activityRepository.deleteById(activityId);
+      budgetService.delete(activityId);
     }
   }
 }

@@ -2,8 +2,8 @@ package org.scouthub.budgetgenerator.domain.service;
 
 import org.scouthub.budgetgenerator.domain.model.Activity;
 
-public interface ActivityService {
-  void createActivity(Activity activity);
+public interface BudgetService {
+  void create(Activity activity);
 
-  void deleteActivity(Long id);
+  void delete(Long id);
 }

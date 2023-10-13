@@ -1,9 +1,6 @@
 package org.scouthub.budgetgenerator.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,15 +12,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Budget {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  Long id;
+  Budget(BudgetPrimaryKey id) {}
 
-  Long activityId;
-  String activityName;
-  String activityDescription;
-  Long materialId;
-  int materialQuantity;
-  float materialPrice;
-  float totalCost;
+  @EmbeddedId BudgetPrimaryKey id;
+
+  @OneToOne()
+  @JoinColumn(name = "budget_activity")
+  @MapsId("activity")
+  Activity activity;
+
+  @OneToOne()
+  @JoinColumn(name = "budget_material")
+  @MapsId("material")
+  Material material;
+
+  //  Long activityId;
+  //  String activityName;
+  //  String activityDescription;
+  //  Long materialId;
+  //  int materialQuantity;
+  //  float materialPrice;
+  //  float totalCost;
 }

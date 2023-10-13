@@ -9,7 +9,7 @@ import org.scouthub.budgetgenerator.domain.model.Material;
 import org.scouthub.budgetgenerator.domain.repository.ActivityRepository;
 import org.scouthub.budgetgenerator.domain.repository.BudgetRepository;
 import org.scouthub.budgetgenerator.domain.repository.MaterialRepository;
-import org.scouthub.budgetgenerator.domain.service.ActivityService;
+import org.scouthub.budgetgenerator.domain.service.BudgetService;
 import org.scouthub.budgetgenerator.infraestructure.kafka.BinderProcessor;
 import org.scouthub.materialsender.infraestructure.kafka.avro.MaterialKey;
 import org.scouthub.materialsender.infraestructure.kafka.avro.MaterialValue;
@@ -29,7 +29,8 @@ public class MaterialListener {
 
   @Autowired BudgetRepository budgetRepository;
 
-  @Autowired ActivityService activityService;
+  @Autowired
+  BudgetService budgetService;
 
   @StreamListener
   @Profile({"default"})
@@ -39,17 +40,14 @@ public class MaterialListener {
     log.debug("Material received by kafka topic");
     materials.foreach(
         (materialKey, materialValue) -> {
-          log.debug("materialKey {}, materialValue {}", materialKey, materialValue);
+          log.debug("MaterialKey {}, MaterialValue {}", materialKey, materialValue);
           if ((materialValue == null)) { // Thombstone record
-            DeleteMaterial.delete(materialKey.getId(), materialRepository, activityRepository);
+            DeleteMaterial.delete(materialKey.getId(), materialRepository);
             return;
           }
           Material material =
               new Material(
-                  materialValue.getId(),
-                  materialValue.getName(),
-                  materialValue.getQuantity(),
-                  materialValue.getPrice());
+                  materialValue.getId(), materialValue.getName(), materialValue.getQuantity());
           CreateMaterial.create(material, materialRepository);
         });
   }
