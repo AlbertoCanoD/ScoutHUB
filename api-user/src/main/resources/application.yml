@@ -24,6 +24,7 @@ spring:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
 
+  # Consumidor de alto nivel de "user_validated"
   cloud:
     stream:
       bindings:
@@ -49,14 +50,6 @@ spring:
         consumer:
           key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
           value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-
-    # Consumimos de "user_validated"
-#    consumer:
-#      group-id: ${spring.application.name}
-#      auto-offset-reset: earliest
-#      properties:
-#        key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-#        value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
 
 logging:
   level:

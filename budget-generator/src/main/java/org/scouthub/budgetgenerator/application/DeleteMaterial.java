@@ -10,8 +10,6 @@ public class DeleteMaterial {
       Long id, MaterialRepository materialRepository, ActivityRepository activityRepository) {
     if (materialRepository.existsById(id)) {
       materialRepository.deleteById(id);
-      activityRepository.deleteByMaterialId(id);
-      // TODO - Si se elimina el material, ver si eliminamos el activity o lo dejamos
     }
   }
 }

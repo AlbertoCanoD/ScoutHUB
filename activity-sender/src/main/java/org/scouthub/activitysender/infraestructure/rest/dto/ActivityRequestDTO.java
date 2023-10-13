@@ -7,12 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ActivityRequestDTO {
   Long id;
-
   String name;
-
   String description;
-
-  Long materialId;
-
-  int quantity;
 }

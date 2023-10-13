@@ -51,9 +51,7 @@ public class ActivityListener {
                 new Activity(
                     activityValue.getId(),
                     activityValue.getName(),
-                    activityValue.getDescription(),
-                    activityValue.getMaterialId(),
-                    activityValue.getMaterialQuantity());
+                    activityValue.getDescription());
             CreateActivity.create(activity, activityRepository, activityService);
             float materialPrice =
                 materialRepository.getReferenceById(activity.getMaterialId()).getPrice();

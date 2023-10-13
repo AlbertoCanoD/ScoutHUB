@@ -1,3 +1,5 @@
 package org.scouthub.budgetgenerator.application;
 
-public class DeleteBudget {}
+public class DeleteBudget {
+
+}

@@ -13,6 +13,4 @@ public class Activity {
   Long id;
   String name;
   String description;
-  Long materialId;
-  int materialQuantity;
 }
