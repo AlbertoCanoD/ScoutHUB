@@ -14,28 +14,21 @@ public class BudgetServiceImpl implements BudgetService {
   static final String BUDGET_TOPIC = "budget";
   @Autowired private KafkaTemplate<BudgetKey, BudgetValue> kafkaTemplate;
 
-//  @Override
-  public void create(Activity activity, Material material) {
+  @Override
+  public void create(Activity activity, Material material, int materialQuantity, float totalCost) {
     BudgetKey budgetKey = new BudgetKey(activity.getId());
 
-    float materialPrice = material.getPrice();
-//    float totalCost = materialPrice * activity.getMaterialQuantity();
-//
-//    BudgetValue budgetValue =
-//        new BudgetValue(
-//            activity.getId(),
-//            activity.getName(),
-//            activity.getMaterialId(),
-//            activity.getMaterialQuantity(),
-//            materialPrice,
-//            totalCost);
+    BudgetValue budgetValue =
+        new BudgetValue(
+            activity.getId(),
+            activity.getName(),
+            activity.getDescription(),
+            material.getId(),
+            materialQuantity,
+            material.getPrice(),
+            totalCost);
 
-//    kafkaTemplate.send(BUDGET_TOPIC, budgetKey, budgetValue);
-  }
-
-  @Override
-  public void create(Activity activity) {
-
+    kafkaTemplate.send(BUDGET_TOPIC, budgetKey, budgetValue);
   }
 
   @Override

@@ -13,5 +13,5 @@ public interface BudgetController {
 
   @DeleteMapping("/budget/activity/{activityId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  void deleteBudget(@PathVariable Long activityId, @PathVariable Long materialId);
+  void deleteBudget(@PathVariable Long activityId);
 }

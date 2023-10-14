@@ -12,6 +12,10 @@
       "type": "string"
     },
     {
+      "name": "activityDescription",
+      "type": "string"
+    },
+    {
       "name": "materialId",
       "type": "long"
     },
