@@ -12,10 +12,6 @@
       "type": "string"
     },
     {
-      "name": "quantity",
-      "type": "int"
-    },
-    {
       "name": "price",
       "type": "float"
     }

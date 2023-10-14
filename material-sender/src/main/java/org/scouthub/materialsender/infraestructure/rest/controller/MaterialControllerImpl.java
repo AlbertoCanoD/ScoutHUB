@@ -6,7 +6,6 @@ import org.scouthub.materialsender.application.CreateMaterial;
 import org.scouthub.materialsender.application.DeleteMaterial;
 import org.scouthub.materialsender.domain.model.Material;
 import org.scouthub.materialsender.infraestructure.kafka.service.MaterialServiceImpl;
-import org.scouthub.materialsender.infraestructure.rest.dto.MaterialDeleteRequestDTO;
 import org.scouthub.materialsender.infraestructure.rest.dto.MaterialRequestDTO;
 import org.scouthub.materialsender.infraestructure.rest.mapper.MaterialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,8 @@ public class MaterialControllerImpl implements MaterialController {
   @Override
   @DeleteMapping(value = "/material/{materialId}")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public void deleteMaterial(@PathVariable MaterialDeleteRequestDTO materialDeleteRequestDTO) {
+  public void deleteMaterial(@PathVariable Long id) {
     log.debug("Received request to delete material");
-    DeleteMaterial.delete(materialDeleteRequestDTO.getId(), materialService);
+    DeleteMaterial.delete(id, materialService);
   }
 }
