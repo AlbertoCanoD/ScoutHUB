@@ -21,7 +21,7 @@ public class ActivityControllerImpl implements ActivityController {
 
   @Override
   @PostMapping(value = "/activity")
-  @ResponseStatus(HttpStatus.ACCEPTED)
+  @ResponseStatus(HttpStatus.CREATED)
   public void createActivity(@Valid @RequestBody ActivityRequestDTO activityRequestDTO) {
     log.debug("Received request to create activity");
     Activity activity = activityMapper.activityRequestDTOToActivity(activityRequestDTO);
@@ -30,9 +30,9 @@ public class ActivityControllerImpl implements ActivityController {
 
   @Override
   @DeleteMapping(value = "/activity/{activityId}")
-  @ResponseStatus(HttpStatus.ACCEPTED)
-  public void deleteActivity(@PathVariable Long id) {
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteActivity(@PathVariable Long activityId) {
     log.debug("Received request to delete activity");
-    DeleteActivity.delete(id, activityService);
+    DeleteActivity.delete(activityId, activityService);
   }
 }
