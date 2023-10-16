@@ -1,6 +1,7 @@
 package org.scouthub.budgetgenerator.infraestructure.rest.controller;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.scouthub.budgetgenerator.application.*;
 import org.scouthub.budgetgenerator.domain.exception.ActivityNotFound;
 import org.scouthub.budgetgenerator.domain.exception.BudgetNotFound;
@@ -12,6 +13,7 @@ import org.scouthub.budgetgenerator.domain.repository.ActivityRepository;
 import org.scouthub.budgetgenerator.domain.repository.BudgetRepository;
 import org.scouthub.budgetgenerator.domain.repository.MaterialRepository;
 import org.scouthub.budgetgenerator.infraestructure.kafka.service.BudgetServiceImpl;
+import org.scouthub.budgetgenerator.infraestructure.rest.dto.CreateBudgetRequestDTO;
 import org.scouthub.budgetgenerator.infraestructure.rest.dto.GetActivityResponseDTO;
 import org.scouthub.budgetgenerator.infraestructure.rest.dto.GetBudgetResponseDTO;
 import org.scouthub.budgetgenerator.infraestructure.rest.dto.GetMaterialResponseDTO;
@@ -41,16 +43,13 @@ public class BudgetControllerImpl implements BudgetController {
   @Autowired MaterialMapperI materialMapper;
 
   @Override
-  @PostMapping("/budget/activity/{activityId}/material/{materialId}/{materialQuantity}")
+  @PostMapping("/budget")
   @ResponseStatus(HttpStatus.CREATED)
-  public void createBudget(
-      @PathVariable Long activityId,
-      @PathVariable Long materialId,
-      @PathVariable int materialQuantity) {
+  public void createBudget(@RequestBody @Valid CreateBudgetRequestDTO requestDTO) {
     CreateBudget.create(
-        activityId,
-        materialId,
-        materialQuantity,
+        requestDTO.getActivityId(),
+        requestDTO.getMaterialId(),
+        requestDTO.getMaterialQuantity(),
         activityRepository,
         materialRepository,
         budgetRepository,
