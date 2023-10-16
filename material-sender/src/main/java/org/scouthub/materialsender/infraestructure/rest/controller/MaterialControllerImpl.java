@@ -32,8 +32,8 @@ public class MaterialControllerImpl implements MaterialController {
   @Override
   @DeleteMapping(value = "/material/{materialId}")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public void deleteMaterial(@PathVariable Long id) {
+  public void deleteMaterial(@PathVariable Long materialId) {
     log.debug("Received request to delete material");
-    DeleteMaterial.delete(id, materialService);
+    DeleteMaterial.delete(materialId, materialService);
   }
 }
