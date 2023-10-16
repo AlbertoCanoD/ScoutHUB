@@ -29,12 +29,16 @@ public class ExcursionListener {
         (excursionKey, excursionValue) -> {
           if ((excursionValue == null)) {
             // Is a tombstone, so record must be deleted from database
-            DeleteExcursion.delete(excursionKey.getId(), excursionRepository);
+            DeleteExcursion.delete(excursionKey.getExcursionId(), excursionRepository);
             return;
           }
 
           // Create excursion in database
-          Excursion excursion = new Excursion(excursionValue.getId());
+          Excursion excursion =
+              new Excursion(
+                  excursionValue.getExcursionId(),
+                  excursionValue.getTotalPrice(),
+                  excursionValue.getBudgets());
           CreateExcursion.create(excursion, excursionRepository);
         });
   }

@@ -1,15 +1,23 @@
 package org.scouthub.apiexcursion.domain.model;
 
-import javax.persistence.Entity;
+import java.util.List;
+import java.util.UUID;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import nonapi.io.github.classgraph.json.Id;
 
 @Entity
-@Getter
+@Data
+//@AllArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
 public class Excursion {
-  @Id Long id;
+  @Id UUID excursionId;
+  float totalPrice;
+
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  List<Budget> budgets;
+
+  public Excursion(UUID excursionId, float totalPrice, List<org.scouthub.budgetgenerator.infraestructure.kafka.avro.Budget> budgets) {
+  }
 }

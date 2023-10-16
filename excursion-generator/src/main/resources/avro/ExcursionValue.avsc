@@ -5,7 +5,10 @@
   "fields": [
     {
       "name": "excursionId",
-      "type": "long"
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
     },
     {
       "name": "totalPrice",

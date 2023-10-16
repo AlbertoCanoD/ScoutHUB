@@ -30,7 +30,7 @@
 
         <!-- Consumers -->
         <module>api-user</module>
-        <!--<module>api-excursion</module>-->
+        <module>api-excursion</module>
     </modules>
 
     <parent>

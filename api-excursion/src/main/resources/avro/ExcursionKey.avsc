@@ -4,8 +4,11 @@
   "name": "ExcursionKey",
   "fields": [
     {
-      "name": "id",
-      "type": "long"
+      "name": "excursionId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
     }
   ]
 }

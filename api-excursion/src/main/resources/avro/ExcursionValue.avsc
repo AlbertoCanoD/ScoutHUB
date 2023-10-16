@@ -4,8 +4,60 @@
   "name": "ExcursionValue",
   "fields": [
     {
-      "name": "id",
-      "type": "long"
+      "name": "excursionId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "totalPrice",
+      "type": "float"
+    },
+    {
+      "name": "budgets",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "namespace": "org.scouthub.budgetgenerator.infraestructure.kafka.avro",
+          "name": "Budget",
+          "fields": [
+            {
+              "name": "activityId",
+              "type": "long"
+            },
+            {
+              "name": "activityName",
+              "type": "string"
+            },
+            {
+              "name": "activityDescription",
+              "type": "string"
+            },
+            {
+              "name": "materialId",
+              "type": "long"
+            },
+            {
+              "name": "materialName",
+              "type": "string"
+            },
+            {
+              "name": "materialQuantity",
+              "type": "int"
+            },
+            {
+              "name": "materialPrice",
+              "type": "float"
+            },
+            {
+              "name": "totalCost",
+              "type": "float"
+            }
+          ]
+        }
+      }
     }
   ]
 }

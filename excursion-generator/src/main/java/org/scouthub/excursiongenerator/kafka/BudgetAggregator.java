@@ -1,5 +1,6 @@
 package org.scouthub.excursiongenerator.kafka;
 
+import java.util.UUID;
 import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.kstream.KStream;
@@ -25,9 +26,14 @@ public class BudgetAggregator {
             .peek(
                 (k, v) -> log.info("[aggregateBudgets] Recibed budget -> key: {}, value: {}", k, v))
             .selectKey(
-                (k, v) -> ExcursionKey.newBuilder().setExcursionId(v.getExcursionId()).build())
+                (k, v) -> {
+                  UUID excursionId = UUID.randomUUID();
+                  return ExcursionKey.newBuilder()
+                      .setExcursionId(UUID.fromString(excursionId.toString()))
+                      .build();
+                })
             .groupByKey()
-            .aggregate(initializer, aggregator, "EXCURSIONS", "EXCURSIONS")
+            .aggregate(initializer, aggregator)
             .toStream()
             .peek(
                 (k, v) ->

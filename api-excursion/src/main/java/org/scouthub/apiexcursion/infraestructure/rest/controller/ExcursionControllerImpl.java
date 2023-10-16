@@ -1,12 +1,14 @@
 package org.scouthub.apiexcursion.infraestructure.rest.controller;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.scouthub.apiexcursion.application.GetAllExcursions;
 import org.scouthub.apiexcursion.application.GetExcursion;
 import org.scouthub.apiexcursion.domain.exception.ExcursionNotFound;
 import org.scouthub.apiexcursion.domain.model.Excursion;
 import org.scouthub.apiexcursion.domain.repository.ExcursionRepository;
-import org.scouthub.apiexcursion.infraestructure.rest.dto.GetExcursionResponseDTO;
+import org.scouthub.apiexcursion.infraestructure.rest.dto.ExcursionDTO;
 import org.scouthub.apiexcursion.infraestructure.rest.mapper.ExcursionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,17 +30,17 @@ public class ExcursionControllerImpl implements ExcursionController {
   @GetMapping(value = "/excursion")
   public ResponseEntity<Object> getAllExcursions() {
     List<Excursion> excursions = GetAllExcursions.get(excursionRepository);
-    List<GetExcursionResponseDTO> getExcursionResponseDTO =
-        excursionMapper.excursionListToGetExcursionResponseDTOList(excursions);
-    return ResponseEntity.status(HttpStatus.OK).body(getExcursionResponseDTO);
+    List<ExcursionDTO> excursionDTO =
+        excursionMapper.excursionListToExcursionDTOList(excursions);
+    return ResponseEntity.status(HttpStatus.OK).body(excursionDTO);
   }
 
   @Override
   @GetMapping(value = "/excursion/{id}")
-  public ResponseEntity<Object> getExcursionById(@PathVariable Long id) throws ExcursionNotFound {
+  public ResponseEntity<Object> getExcursionById(@PathVariable UUID id) throws ExcursionNotFound {
     Excursion excursion = GetExcursion.get(id, excursionRepository);
-    GetExcursionResponseDTO getExcursionResponseDTO =
-        excursionMapper.excursionToGetExcursionResponseDTO(excursion);
-    return ResponseEntity.status(HttpStatus.OK).body(getExcursionResponseDTO);
+    ExcursionDTO excursionDTO =
+        excursionMapper.excursionToExcursionDTO(excursion);
+    return ResponseEntity.status(HttpStatus.OK).body(excursionDTO);
   }
 }
