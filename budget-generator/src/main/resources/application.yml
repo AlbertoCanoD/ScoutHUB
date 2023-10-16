@@ -20,26 +20,18 @@ spring:
     show-sql: true
     hibernate.ddl-auto: update
 
-    # Consumimos de "activity" y "material"
-  #    consumer:
-  #      group-id: ${spring.application.name}
-  #      auto-offset-reset: earliest
-  #      properties:
-  #        key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  #        value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-
   kafka:
     # Propiedades generales de Kafka
     properties:
       schema.registry.url: http://schema-registry:8084
       bootstrap.servers: kafka:29092
 
-      # Producimos a "budget"
+    # Producimos a "budget"
     producer:
       key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
 
-  # Consumidor de alto nivel de "user_validated"
+  # Consumidor de alto nivel de "activity" y "material"
   cloud:
     stream:
       bindings:
@@ -53,11 +45,6 @@ spring:
           destination: material
           consumer:
             useNativeDecoding: true
-#        budget:
-#          content-type: application/avro
-#          destination: budget
-#          producer:
-#            useNativeEncoding: true
       kafka:
         streams:
           binder:
@@ -75,7 +62,6 @@ spring:
         consumer:
           key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
           value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-
 
 logging:
   level:

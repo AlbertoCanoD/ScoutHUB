@@ -8,7 +8,8 @@ import org.scouthub.budgetgenerator.domain.repository.MaterialRepository;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GetMaterial {
-  public static Material get(Long id, MaterialRepository materialRepository) throws MaterialNotFound {
+  public static Material get(Long id, MaterialRepository materialRepository)
+      throws MaterialNotFound {
     return materialRepository.findById(id).orElseThrow(MaterialNotFound::new);
   }
 }
