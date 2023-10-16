@@ -15,6 +15,6 @@ public interface BinderProcessor {
   @Input(MATERIAL)
   KStream<?, ?> material();
 
-  @Output(BUDGET)
-  KStream<?, ?> budget();
+  //  @Output(BUDGET)
+  //  KStream<?, ?> budget();
 }

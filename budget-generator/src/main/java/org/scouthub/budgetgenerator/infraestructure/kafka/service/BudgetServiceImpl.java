@@ -24,6 +24,7 @@ public class BudgetServiceImpl implements BudgetService {
             activity.getName(),
             activity.getDescription(),
             material.getId(),
+            material.getName(),
             materialQuantity,
             material.getPrice(),
             totalCost);

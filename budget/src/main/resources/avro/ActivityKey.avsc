@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "namespace": "org.scouthub.activitysender.infraestructure.kafka.avro",
+  "name": "ActivityKey",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ]
+}

@@ -1,18 +1,16 @@
-package org.scouthub.budgetgenerator.domain.model;
+package org.scouthub.budgetgenerator.infraestructure.rest.dto;
 
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Budget {
-  @Id Long activityId;
+@NoArgsConstructor
+@Getter
+@Builder
+public class GetBudgetResponseDTO {
+  Long activityId;
   String activityName;
   String activityDescription;
   Long materialId;

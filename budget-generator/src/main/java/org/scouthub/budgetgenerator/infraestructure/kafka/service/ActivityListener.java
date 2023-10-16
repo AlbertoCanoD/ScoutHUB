@@ -12,7 +12,6 @@ import org.scouthub.budgetgenerator.infraestructure.kafka.BinderProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @SuppressWarnings("ALL")
@@ -22,7 +21,8 @@ public class ActivityListener {
   @Autowired ActivityRepository activityRepository;
 
   @StreamListener()
-  @Profile({"default"})
+  //  @SendTo(BinderProcessor.BUDGET)
+  //  @Profile({"default"})
   public void activities(
       @Input(BinderProcessor.ACTIVITY) KStream<ActivityKey, ActivityValue> activities) {
     log.debug("Activity received by kafka topic");

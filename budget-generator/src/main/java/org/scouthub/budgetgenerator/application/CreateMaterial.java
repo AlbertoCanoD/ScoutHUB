@@ -1,12 +1,14 @@
 package org.scouthub.budgetgenerator.application;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.scouthub.budgetgenerator.domain.model.Material;
 import org.scouthub.budgetgenerator.domain.repository.MaterialRepository;
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CreateMaterial {
-  private CreateMaterial() {}
 
   public static void create(Material material, MaterialRepository materialRepository) {
     if (material == null) {
