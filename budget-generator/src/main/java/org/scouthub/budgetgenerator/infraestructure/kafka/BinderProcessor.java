@@ -6,14 +6,10 @@ import org.springframework.cloud.stream.annotation.Input;
 public interface BinderProcessor {
   String ACTIVITY = "activity";
   String MATERIAL = "material";
-  String BUDGET = "budget";
 
   @Input(ACTIVITY)
   KStream<?, ?> activity();
 
   @Input(MATERIAL)
   KStream<?, ?> material();
-
-  //  @Output(BUDGET)
-  //  KStream<?, ?> budget();
 }
