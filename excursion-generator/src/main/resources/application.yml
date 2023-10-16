@@ -1,24 +1,55 @@
 server:
   port: 8080
 
-topic-in-0: profesores-asignados
-topic-out-0: profesores-nivel-asignatura
+# Topic de entrada
+topic-in-0: budget
+
+# Topic de salida
+topic-out-0: excursion
 
 spring:
   application:
     name: excursion-generator
 
-  kafka:
-    properties:
-      schema.registry.url: http://schema-registry:8084
-      bootstrap.servers: kafka:29092
+  cloud:
+    # Nombre de la función
+    function.definition: aggregateBudgets;
 
-    producer:
-      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    stream:
+      # Configuracion flujo de entrada y salida
+      bindings:
+        aggregateBudgets-in-0:
+          destination: ${topic-in-0}
+          consumer:
+            concurrency: 1
+            useNativeDecoding: true
 
-environment:
-  user-topic: user
+        aggregateBudgets-out-0:
+          destination: ${topic-out-0}
+          producer.useNativeEncoding: true
+
+      # Configuración de Kafka
+      kafka:
+        binder:
+          brokers: kafka:29092
+
+      kafka.streams:
+
+        bindings:
+          aggregateBudgets-in-0:
+            consumer:
+              keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              applicationId: ${spring.application.name}
+
+        binder:
+          configuration:
+            commit.interval.ms: 100
+            session.timeout.ms: 10000
+            schema.registry.url: http://schema-registry:8084
+            auto.register.schemas: true
+            default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+            default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 
 logging:
   level:

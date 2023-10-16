@@ -21,8 +21,24 @@
 from
     `user` u;]]></console>
     </connection>
-    <connection id="9a6deb86-e0c6-4ec1-8f24-17f131e8e5e5">
-      <console name="BUDGET-GENERATOR" type="STANDARD" schema="" session="Main" />
+    <connection id="ef61e5d0-a22a-46e8-9c11-dee67ef0a061">
+      <console name="budget" type="STANDARD" schema="" session="Main"><![CDATA[select
+    a.description,
+    a."id",
+    a."name"
+from
+    activity a;]]></console>
+      <console name="BUDGET-GENERATOR 1" type="STANDARD" schema="postgres" session="Main"><![CDATA[select
+    b.activity_description,
+    b.activity_id,
+    b.activity_name,
+    b.material_id,
+    b.material_name,
+    b.material_price,
+    b.material_quantity,
+    b.total_cost
+from
+    budget b;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -36,6 +52,14 @@ from
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <argument-values-cache />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
@@ -139,25 +163,25 @@ from
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="9a6deb86-e0c6-4ec1-8f24-17f131e8e5e5" active="true" signed="true">
+      <connection id="ef61e5d0-a22a-46e8-9c11-dee67ef0a061" active="true" signed="true">
         <database>
           <name value="BUDGET-GENERATOR" />
           <description value="" />
-          <database-type value="MYSQL" />
+          <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="8.0" />
+          <database-version value="14.1" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
           <host value="localhost" />
-          <port value="3306" />
-          <database value="mysql" />
+          <port value="5432" />
+          <database value="postgres" />
           <tns-folder value="" />
           <tns-profile value="" />
           <type value="USER_PASSWORD" />
-          <user value="root" />
-          <deprecated-pwd value="cm9vdA==" />
+          <user value="postgres" />
+          <deprecated-pwd value="cG9zdGdyZXM=" />
         </database>
         <properties>
           <auto-commit value="false" />

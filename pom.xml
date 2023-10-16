@@ -26,12 +26,10 @@
         <!-- Services -->
         <module>user-validator</module>
         <module>budget-generator</module>
-        <!--<module>budget</module>-->
-        <!--<module>excursion-generator</module> -->
+        <module>excursion-generator</module>
 
         <!-- Consumers -->
         <module>api-user</module>
-
         <!--<module>api-excursion</module>-->
     </modules>
 

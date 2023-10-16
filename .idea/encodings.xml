@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/activity-sender/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/activity-sender/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api-excursion/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-excursion/target/generated-sources/avro" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api-user/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/budget-generator/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/budget/src/main/java" charset="UTF-8" />
