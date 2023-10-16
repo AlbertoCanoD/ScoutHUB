@@ -1,9 +1,9 @@
 package org.scouthub.budgetgenerator.domain.exception;
 
 public class ActivityNotFound extends Exception {
-  public static final String THE_ACTIVITY_DOES_NOT_EXISTS = "The activity does not exists";
+  public static final String THIS_MATERIAL_DOES_NOT_EXIST = "This material does not exist";
 
   public ActivityNotFound() {
-    super(THE_ACTIVITY_DOES_NOT_EXISTS);
+    super(THIS_MATERIAL_DOES_NOT_EXIST);
   }
 }

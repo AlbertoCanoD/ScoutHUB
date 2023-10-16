@@ -6,7 +6,7 @@ import org.scouthub.budgetgenerator.domain.model.Material;
 import org.scouthub.budgetgenerator.infraestructure.rest.dto.GetMaterialResponseDTO;
 
 @Mapper(componentModel = "spring")
-public interface MaterialMapper {
+public interface MaterialMapperI {
   GetMaterialResponseDTO materialToGetMaterialResponseDTO(Material material);
 
   List<GetMaterialResponseDTO> materialListToGetMaterialResponseDTOList(List<Material> materials);

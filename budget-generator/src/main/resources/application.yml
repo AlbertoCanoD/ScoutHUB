@@ -48,6 +48,11 @@ spring:
           destination: activity
           consumer:
             useNativeDecoding: true
+        material:
+          content-type: application/avro
+          destination: material
+          consumer:
+            useNativeDecoding: true
       kafka:
         streams:
           binder:

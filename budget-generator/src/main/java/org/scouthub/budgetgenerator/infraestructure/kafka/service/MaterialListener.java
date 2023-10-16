@@ -12,6 +12,7 @@ import org.scouthub.materialsender.infraestructure.kafka.avro.MaterialValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,7 +22,7 @@ public class MaterialListener {
 
   @StreamListener()
   //  @SendTo(BinderProcessor.BUDGET)
-  //  @Profile({"default"})
+  @Profile({"default"})
   public void materials(
       @Input(BinderProcessor.MATERIAL) KStream<MaterialKey, MaterialValue> materials) {
     log.debug("Material received by kafka topic");
