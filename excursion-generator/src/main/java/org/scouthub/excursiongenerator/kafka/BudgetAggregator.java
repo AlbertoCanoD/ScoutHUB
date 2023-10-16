@@ -26,12 +26,7 @@ public class BudgetAggregator {
             .peek(
                 (k, v) -> log.info("[aggregateBudgets] Recibed budget -> key: {}, value: {}", k, v))
             .selectKey(
-                (k, v) -> {
-                  UUID excursionId = UUID.randomUUID();
-                  return ExcursionKey.newBuilder()
-                      .setExcursionId(UUID.fromString(excursionId.toString()))
-                      .build();
-                })
+                (k, v) -> ExcursionKey.newBuilder().setExcursionId(UUID.randomUUID()).build())
             .groupByKey()
             .aggregate(initializer, aggregator)
             .toStream()

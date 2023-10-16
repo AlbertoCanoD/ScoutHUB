@@ -52,14 +52,12 @@ from
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="a3ecf423-513c-4f40-aa1e-bc7c2a2ad298" object-ref="schemas/api-excursion-db/tables/budget" />
-      <object connection-id="a3ecf423-513c-4f40-aa1e-bc7c2a2ad298" object-ref="schemas/api-excursion-db/tables/excursion" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="a3ecf423-513c-4f40-aa1e-bc7c2a2ad298" dataset="api-excursion-db.budget" active-filter-id="" />
     <filter-actions connection-id="a3ecf423-513c-4f40-aa1e-bc7c2a2ad298" dataset="api-excursion-db.excursion" active-filter-id="" />
+    <filter-actions connection-id="a3ecf423-513c-4f40-aa1e-bc7c2a2ad298" dataset="api-excursion-db.excursion_budgets" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

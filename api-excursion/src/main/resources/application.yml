@@ -1,13 +1,78 @@
 server:
   port: 8080
 
+topic-in-0: excursion
+
 spring:
   application:
     name: api-excursion
 
-  config:
-    activate:
-      on-profile: default
+  cloud:
+
+    function.definition: process;
+
+    stream:
+
+      bindings:
+        process-in-0:
+          destination: ${topic-in-0}
+          consumer:
+            concurrency: 1
+            useNativeDecoding: true
+
+      kafka:
+        binder:
+          brokers: kafka:29092
+
+      kafka.streams:
+        bindings:
+          process-in-0:
+            consumer:
+              keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              applicationId: ${spring.application.name}
+
+        binder:
+          configuration:
+            commit.interval.ms: 100
+            session.timeout.ms: 10000
+            schema.registry.url: http://schema-registry:8084
+            auto.register.schemas: true
+            default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+            default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+
+  #  kafka:
+  #    # Propiedades generales de Kafka
+  #    properties:
+  #      schema.registry.url: http://schema-registry:8084
+  #      bootstrap.servers: kafka:29092
+  #
+  #  # Consumidor de alto nivel de "excursion"
+  #  cloud:
+  #    stream:
+  #      bindings:
+  #        excursion:
+  #          content-type: application/avro
+  #          destination: excursion
+  #          consumer:
+  #            useNativeDecoding: true
+  #      kafka:
+  #        streams:
+  #          binder:
+  #            stateStoreRetry:
+  #              maxAttempts: 10
+  #            configuration:
+  #              state.dir: /tmp
+  #              commit.interval.ms: 100
+  #              topology.optimization: all
+  #              session.timeout.ms: 10000
+  #              schema.registry.url: http://schema-registry:8084
+  #              auto.register.schemas: true
+  #              default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+  #              default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+  #        consumer:
+  #          key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+  #          value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
 
   datasource:
     url: jdbc:mysql://api-excursion-db:3306/api-excursion-db
@@ -17,39 +82,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
-  kafka:
-    # Propiedades generales de Kafka
-    properties:
-      schema.registry.url: http://schema-registry:8084
-      bootstrap.servers: kafka:29092
-
-  # Consumidor de alto nivel de "excursion"
-  cloud:
-    stream:
-      bindings:
-        excursion:
-          content-type: application/avro
-          destination: excursion
-          consumer:
-            useNativeDecoding: true
-      kafka:
-        streams:
-          binder:
-            stateStoreRetry:
-              maxAttempts: 10
-            configuration:
-              state.dir: /tmp
-              commit.interval.ms: 100
-              topology.optimization: all
-              session.timeout.ms: 10000
-              schema.registry.url: http://schema-registry:8084
-              auto.register.schemas: true
-              default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-              default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-        consumer:
-          key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-          value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
 
 logging:
   level:
