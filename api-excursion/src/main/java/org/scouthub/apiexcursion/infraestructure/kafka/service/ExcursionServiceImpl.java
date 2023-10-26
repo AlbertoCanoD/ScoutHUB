@@ -2,7 +2,6 @@ package org.scouthub.apiexcursion.infraestructure.kafka.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import org.scouthub.apiexcursion.domain.model.Budget;
 import org.scouthub.apiexcursion.domain.model.Excursion;
 import org.scouthub.apiexcursion.domain.repository.ExcursionRepository;
@@ -23,29 +22,19 @@ public class ExcursionServiceImpl implements ExcursionService {
   }
 
   @Override
-  public ExcursionDTO getExcursionById(UUID excursionId) {
-    Optional<Excursion> excursion = excursionRepository.findById(excursionId);
-
-    if (excursion.isPresent()) {
-      Excursion excursionEntity = excursion.get();
-      return new ExcursionMapper().entityToDto(excursionEntity);
-    }
-    return null;
-  }
-
-  @Override
   public void create(ExcursionDTO excursionDTO) {
     Optional<Excursion> existingExcursion =
         excursionRepository.findById(excursionDTO.getExcursionId());
 
     if (existingExcursion.isPresent()) {
       List<Budget> budgets = new BudgetMapper().dtoListToEntityList(excursionDTO.getBudgets());
-      Excursion excursion =
-          new Excursion(excursionDTO.getExcursionId(), excursionDTO.getTotalPrice(), budgets);
-      excursionRepository.save(excursion);
+      existingExcursion.get().setExcursionId(excursionDTO.getExcursionId());
+      existingExcursion.get().setTotalPrice(excursionDTO.getTotalPrice());
+      existingExcursion.get().setBudgets(budgets);
+      excursionRepository.save(existingExcursion.get());
+    } else {
+      Excursion newExcursion = new ExcursionMapper().dtoToEntity(excursionDTO);
+      excursionRepository.save(newExcursion);
     }
-
-    Excursion newExcursion = new ExcursionMapper().dtoToEntity(excursionDTO);
-    excursionRepository.save(newExcursion);
   }
 }

@@ -55,9 +55,7 @@ de gestion de un grupo Scout.
 
 ### Excursiones
 
-- Generar una excursión a partir de un presupuesto.
-- Eliminar una excursión.
-- Consultar una excursión.
+- Generar una excursión a partir de un presupuesto o más.
 - Consultar todas las excursiones.
 
 ## Requisitos no funcionales
@@ -74,18 +72,15 @@ de gestion de un grupo Scout.
 
 ## Diagrama de funcionamiento
 
-(Imagenes disponibles en /img)
-
-# Revisar Fotos
+(Imagenes disponibles en mayor calidad en /img)
 
 ### Parte de usuarios
 
-![User-Diagram](img/user-diagram.png)
+![img.png](img/user-diagram.png)
 
 ### Parte de excursiones
 
-![Excursion-Diagram](img/excursion-diagram.png)
-(Ver imagen en el repositorio)
+![img.png](img/excursion-diagram.png)
 
 ## Explicación del funcionamiento de los microservicios y topics
 
@@ -114,7 +109,7 @@ de gestion de un grupo Scout.
 ### API de consulta
 
 - **API USER**: Recibe los mensajes del topic "user-validated", con los usuarios
-  que son válidos y los almacena en la base de datos MySQL.
+  que son válidos y los almacena en la base de datos.
 
 - **API EXCURSION**: Recibe los mensajes del topic "excursion", con las
   excursiones compuestas por varias actividades y las almacena en la base de datos.
@@ -123,26 +118,18 @@ de gestion de un grupo Scout.
 
 - Implementado totalmente con Docker y despliegue con Docker-Compose.
 
-## Modelado de las entidades
-
-ENSEÑAR TABLAS DE LA BASE DE DATOS Y EL SENTIDO QUE TIENEN
-
-## Diagrama de clases
-
-GENERAR DIAGRAMA DE CLASES EN CASO DE QUE SEA POSIBLE
-
 ## Guía de uso
 
 1. ``mvn clean install`` para instalar las dependencias del proyecto.
 2. ``docker-compose up --build`` para levantar todo el sistema.
-3. Arrancar desde el IDE el servicio Config Server.
-4. Arrancar desde el IDE el servicio Eureka Server.
-5. Arrancar desde el IDE el servicio Gateway Server.
-6. Arrancar desde el IDE los servicios User-Crud, Pizza-Read y Pizza-Write.
 
 ## Problemas conocidos
 
-# HACER EL SWAGGER
+- Faltan comprobaciones al crear o eliminar objetos.
+- Se añade una excursion por presupuesto, cuando debería ser cada dos presupuestos
+- El presupuesto no muestra el precio total, muestra 0.
+- En excursion key y value el id son diferentes.
+- No se muestran los budgets en la excursion.
 
 ## Servicios implementados
 
@@ -151,27 +138,15 @@ GENERAR DIAGRAMA DE CLASES EN CASO DE QUE SEA POSIBLE
 - User-Sender: http://localhost:8085/swagger-ui.html
 - Activity-Sender: http://localhost:8086/swagger-ui.html
 - Material-Sender: http://localhost:8087/swagger-ui.html
-- Budget-Generator: http://localhost:8089/swagger-ui.html (No va)
-- Excursion-Generator: http://localhost:8091/swagger-ui.html (No va)
+- Budget-Generator: http://localhost:8089/swagger-ui.html
 - Api-User: http://localhost:8090/swagger-ui.html
-- Api-Excursion: http://localhost:8092/swagger-ui.html (No va)
+- Api-Excursion: http://localhost:8092/swagger-ui.html
 
 ### Kafka
 
 - Kowl: http://localhost:18080/
 - Schema-Registry: http://localhost:8084/
 - Zookeeper: http://localhost:2181/
-- Kafka: http://localhost:9092/
-
-### Bases de datos
-
-- Budget-Generator: http://localhost:8089/h2-console
-- Api-User: http://localhost:8090/h2-console
-- Api-Excursion: http://localhost:8092/h2-console
-
-## Valor añadido
-
-# añadir si hago jenkins o algo de eso
 
 ## Autor
 

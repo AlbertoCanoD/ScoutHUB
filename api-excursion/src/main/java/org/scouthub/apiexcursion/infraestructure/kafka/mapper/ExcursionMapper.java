@@ -7,32 +7,6 @@ import org.scouthub.excursiongenerator.infraestructure.kafka.avro.ExcursionKey;
 import org.scouthub.excursiongenerator.infraestructure.kafka.avro.ExcursionValue;
 
 public class ExcursionMapper implements Mapper<ExcursionKey, ExcursionValue, ExcursionDTO> {
-  @Override
-  public ExcursionDTO toDTO(
-      ExcursionKey excursionKey, ExcursionValue excursionValue, ExcursionDTO excursionDTO) {
-
-    List<BudgetDTO> budgets =
-        excursionValue.getBudgets().stream()
-            .map(
-                b ->
-                    BudgetDTO.builder()
-                        .activityId(b.getActivityId())
-                        .activityName(b.getActivityName())
-                        .activityDescription(b.getActivityDescription())
-                        .materialId(b.getMaterialId())
-                        .materialName(b.getMaterialName())
-                        .materialPrice(b.getMaterialPrice())
-                        .materialQuantity(b.getMaterialQuantity())
-                        .totalCost(b.getTotalCost())
-                        .build())
-            .toList();
-
-    return ExcursionDTO.builder()
-        .excursionId(excursionKey.getExcursionId())
-        .totalPrice(excursionValue.getTotalPrice())
-        .budgets(budgets)
-        .build();
-  }
 
   @Override
   public ExcursionDTO toDTO(ExcursionKey key, ExcursionValue value) {

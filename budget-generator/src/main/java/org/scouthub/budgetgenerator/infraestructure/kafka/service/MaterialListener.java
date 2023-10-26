@@ -21,7 +21,6 @@ public class MaterialListener {
   @Autowired MaterialRepository materialRepository;
 
   @StreamListener()
-  //  @SendTo(BinderProcessor.BUDGET)
   @Profile({"default"})
   public void materials(
       @Input(BinderProcessor.MATERIAL) KStream<MaterialKey, MaterialValue> materials) {

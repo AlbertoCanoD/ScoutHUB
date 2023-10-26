@@ -15,7 +15,6 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.Payload;
 
-@SuppressWarnings("ALL")
 @SpringBootApplication
 @Slf4j
 public class UserValidatorApplication {

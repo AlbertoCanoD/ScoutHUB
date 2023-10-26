@@ -3,7 +3,6 @@ package org.scouthub.apiexcursion.domain.model;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity

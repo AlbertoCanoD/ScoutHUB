@@ -17,11 +17,15 @@ public class Aggregator
     Budget newBudget = createBudget(budgetValue);
     excursionValue.getBudgets().add(newBudget);
 
+    // TODO - No funciona bien
     // Check if there are enough activities
     if (excursionValue.getBudgets().size() >= 2) {
       // Compute the totalPrice by adding the totalCost of the activities
-      float totalPrice =
-          excursionValue.getBudgets().stream().map(Budget::getTotalCost).reduce(0.0f, Float::sum);
+      float totalPrice = 0.0f;
+
+      for (Budget budget : excursionValue.getBudgets()) {
+        totalPrice += budget.getTotalCost();
+      }
 
       // Create a new ExcursionValue with the new budget
       return ExcursionValue.newBuilder()

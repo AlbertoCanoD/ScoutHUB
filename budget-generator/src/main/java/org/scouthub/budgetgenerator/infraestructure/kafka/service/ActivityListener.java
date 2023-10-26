@@ -22,7 +22,6 @@ public class ActivityListener {
   @Autowired ActivityRepository activityRepository;
 
   @StreamListener()
-  //  @SendTo(BinderProcessor.BUDGET)
   @Profile({"default"})
   public void activities(
       @Input(BinderProcessor.ACTIVITY) KStream<ActivityKey, ActivityValue> activities) {

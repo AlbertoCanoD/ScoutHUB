@@ -8,5 +8,4 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ExcursionRepository extends JpaRepository<Excursion, UUID> {
-}
+public interface ExcursionRepository extends JpaRepository<Excursion, UUID> {}

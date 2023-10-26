@@ -4,6 +4,8 @@ import java.util.UUID;
 import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.Named;
 import org.scouthub.budgetgenerator.infraestructure.kafka.avro.BudgetKey;
 import org.scouthub.budgetgenerator.infraestructure.kafka.avro.BudgetValue;
 import org.scouthub.excursiongenerator.infraestructure.kafka.avro.ExcursionKey;
@@ -28,10 +30,11 @@ public class BudgetAggregator {
             .selectKey(
                 (k, v) -> ExcursionKey.newBuilder().setExcursionId(UUID.randomUUID()).build())
             .groupByKey()
-            .aggregate(initializer, aggregator)
-            .toStream()
-            .peek(
-                (k, v) ->
-                    log.info("[aggregateBudgets] Budgets aggregateds -> key: {}, value: {}", k, v));
+            .aggregate(
+                initializer,
+                aggregator,
+                Named.as("excursion-aggregation-store"),
+                Materialized.as("excursion-aggregation-store"))
+            .toStream();
   }
 }

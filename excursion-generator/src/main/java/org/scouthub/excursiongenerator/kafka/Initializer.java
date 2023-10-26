@@ -10,6 +10,7 @@ public class Initializer implements org.apache.kafka.streams.kstream.Initializer
   @Override
   public ExcursionValue apply() {
     return ExcursionValue.newBuilder()
+        // TODO - Posible error de cambio UUID
         .setExcursionId(UUID.randomUUID())
         .setTotalPrice(0.0f)
         .setBudgets(new ArrayList<>())

@@ -8,6 +8,5 @@ import lombok.Getter;
 public class MaterialRequestDTO {
   Long id;
   String name;
-  int quantity;
   float price;
 }
